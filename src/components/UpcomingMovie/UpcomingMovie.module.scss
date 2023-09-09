@@ -1,0 +1,29 @@
+@import "src/utils/reset";
+
+@import "src/utils/reset";
+
+@import "src/utils/reset";
+@import "src/utils/mixin";
+
+.upcomingMovie {
+  width: 70vw;
+  display: flex;
+  flex-direction: column;
+
+  &_top {
+    margin-left: 20px;
+    padding: 10px 0;
+    border-bottom: 1px solid lightgray;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &_title {
+      @include main_title;
+    }
+
+    &_button {
+      @include button;
+    }
+  }
+}

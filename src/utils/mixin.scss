@@ -1,0 +1,21 @@
+@mixin flex_center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin main_title {
+  color: var(--color-text-black);
+  font-size: 28px;
+  font-weight: 600;
+}
+
+@mixin button {
+  background: var(--light-theme-background);
+  color: var(--color-text-white);
+  border-radius: 5px;
+  padding: 10px;
+
+  font-size: 16px;
+  font-weight: 500;
+}
