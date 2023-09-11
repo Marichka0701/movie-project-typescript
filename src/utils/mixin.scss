@@ -9,13 +9,3 @@
   font-size: 28px;
   font-weight: 600;
 }
-
-@mixin button {
-  background: var(--light-theme-background);
-  color: var(--color-text-white);
-  border-radius: 5px;
-  padding: 10px;
-
-  font-size: 16px;
-  font-weight: 500;
-}

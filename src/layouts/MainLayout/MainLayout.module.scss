@@ -1,5 +1,7 @@
 @import "src/utils/reset";
+@import "src/utils/mixin";
 
 .mainLayout {
-
+  @include flex_center;
+  flex-direction: column;
 }

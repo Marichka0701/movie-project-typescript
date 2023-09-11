@@ -1,0 +1,123 @@
+@import "src/utils/reset";
+@import "src/utils/mixin";
+
+.detailedMovieCardContainer {
+  padding-bottom: 50px;
+  @include flex_center;
+  flex-direction: column;
+  gap: 50px;
+  //height: 9000px;
+}
+
+.detailedMovieCard {
+  width: 100vw;
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+
+  //display: flex;
+  //align-items: flex-start;
+
+  &:before {
+    content: "";
+    position: absolute; /* За допомогою позиції absolute знаходимо псевдоелемент поверх обраної картинки */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.85);
+  }
+
+  &_info {
+    //@include flex_center;
+    padding: 100px;
+    z-index: 1000;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 100px;
+
+    &_image {
+      & > img {
+        width: 300px;
+        border-radius: 20px;
+      }
+    }
+
+    &_description {
+      display: flex;
+      flex-direction: column;
+      gap: 50px;
+
+      &_title {
+        font-size: 40px;
+        color: var(--color-text-white);
+        font-weight: 700;
+        letter-spacing: 1.5px;
+      }
+
+      &_group {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        &_genres {
+          display: flex;
+          gap: 20px;
+        }
+
+        &_overview {
+          color: var(--color-text-white);
+          font-size: 20px;
+          line-height: 150%;
+          text-align: justify;
+
+          & > span {
+            font-weight: 700;
+          }
+        }
+
+        &_slogan {
+          font-style: italic;
+          opacity: .7;
+        }
+
+
+        &_slogan, &_budget, &_release, &_stars, &_duration {
+          color: var(--color-text-white);
+          font-size: 18px;
+
+          & > span {
+            font-weight: 700;
+          }
+        }
+      }
+    }
+  }
+}
+
+.tabs {
+  display: flex;
+  gap: 5px;
+  border-bottom: 1px solid gray;
+
+  & > li {
+    cursor: pointer;
+    padding: 10px;
+    border: 1px solid transparent;
+
+    &.active {
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      border-top: 1px solid gray;
+      border-left: 1px solid gray;
+      border-right: 1px solid gray;
+    }
+  }
+
+  &_content {
+    width: 80vw;
+  }
+}
+

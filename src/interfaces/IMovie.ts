@@ -1,4 +1,6 @@
- export interface IMovie {
+import {IGenre} from "./IGenre";
+
+export interface IMovie {
     backdrop_path: string,
     genre_ids: number[],
     id: number,
@@ -9,4 +11,8 @@
     release_date: string,
     title: string,
     vote_average: number,
+    tagline: string,
+    budget: number,
+    runtime: number,
+    genres: IGenre[],
 }

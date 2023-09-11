@@ -1,0 +1,44 @@
+@import "src/utils/reset";
+@import "src/utils/mixin";
+
+.popularMoviePage {
+  padding: 50px;
+  width: 80vw;
+  background: var(--color-text-white);
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+
+  &_info {
+    //padding-top: 100px;
+    display: flex;
+    gap: 100px;
+
+    &_facts {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      &_title {
+        margin-bottom: 50px;
+        font-style: italic;
+        letter-spacing: 1px;
+        font-size: 30px;
+        font-weight: 700;
+        color: var(--color-text-black);
+      }
+
+      & > p {
+        padding: 20px;
+        width: 300px;
+        background: var(--light-theme-background);
+        //background: #282c34;
+        border-radius: 5px;
+
+        color: whitesmoke;
+        line-height: 125%;
+        font-weight: 500;
+      }
+    }
+  }
+}

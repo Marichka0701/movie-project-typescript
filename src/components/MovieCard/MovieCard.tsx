@@ -1,19 +1,32 @@
 import React, {FC, PropsWithChildren} from 'react';
+import {useNavigate} from "react-router-dom";
 
 import styles from './MovieCard.module.scss';
 import {IMovie} from "../../interfaces/IMovie";
+import {MAIN_ROUTES} from "../../routing/main_routes";
+import ImagePreview from "../ImagePreview/ImagePreview";
 
 interface IProps extends PropsWithChildren {
     card: IMovie,
 }
 
 const MovieCard: FC<IProps> = ({card}) => {
-    const {poster_path, title, release_date} = card;
+    const {poster_path, title, release_date, id} = card;
+
+    const navigate = useNavigate();
+
+    const handleNavigate = (id:number) => {
+        navigate(`${MAIN_ROUTES.MOVIES}/${id}`);
+    }
 
     return (
-        <div className={styles.card}>
+        <div
+            onClick={() => handleNavigate(id)}
+            className={styles.card}
+        >
             <div className={styles.card_image}>
-                <img src={`${process.env.REACT_APP_IMAGE_URL}${poster_path}`} alt={title}/>
+                {/*<img src={`${process.env.REACT_APP_IMAGE_URL}${poster_path}`} alt={title}/>*/}
+                <ImagePreview path={poster_path} title={title} />
             </div>
 
             <div className={styles.card_info}>

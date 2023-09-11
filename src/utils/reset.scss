@@ -72,7 +72,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 body {
+  overflow-x: hidden;
   font-family: 'Fira Sans', sans-serif;
+  background: lightgray;
 }
 
 :root {

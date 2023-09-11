@@ -1,0 +1,12 @@
+@import "src/utils/reset";
+
+.genre {
+  padding: 5px 10px;
+  border-radius: 10px;
+  background: gray;
+  border: 1px solid var(--color-text-black);
+  cursor: pointer;
+
+  color: var(--color-text-black);
+  font-weight: 600;
+}

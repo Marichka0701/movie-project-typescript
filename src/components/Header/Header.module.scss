@@ -1,1 +1,29 @@
 @import "src/utils/reset";
+
+.header {
+  width: 100vw;
+  height: 80px;
+  padding: 20px 10vw;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  //background: var(--light-theme-background);
+  background: #282c34;
+
+  color: var(--color-text-white);
+
+  &_list {
+    padding-left: 20px;
+    display: flex;
+    gap: 100px;
+
+    & > li {
+      cursor: pointer;
+      //letter-spacing: 1px;
+      font-weight: 600;
+    }
+  }
+}

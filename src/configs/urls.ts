@@ -7,6 +7,7 @@ const genre = '/genre';
 
 const endPoints = {
     movie: {
+        base: movie,
         nowPlaying: `${baseURL}/${movie}/now_playing`,
         popular: `${baseURL}/${movie}/popular`,
         topRated: `${baseURL}/${movie}/top_rated`,

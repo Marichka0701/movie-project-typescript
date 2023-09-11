@@ -10,13 +10,16 @@ import '../../index.css';
 import { FreeMode, Pagination } from 'swiper/modules';
 import {IMovie} from "../../interfaces/IMovie";
 import MovieCard from "../MovieCard/MovieCard";
+import CastCard from "../CastCard/CastCard";
+import {ICast} from "../../interfaces/ICast";
 
 
 interface IProps extends PropsWithChildren {
-    content: IMovie[],
+    content: IMovie[] | ICast[],
+    card: string,
 }
 
-const MovieSwiper: FC<IProps> = ({content}) => {
+const AppSwiper: FC<IProps> = ({content, card}) => {
     const breakpoints = {
         320: {
             slidesPerView: 2,
@@ -39,7 +42,7 @@ const MovieSwiper: FC<IProps> = ({content}) => {
             spaceBetween: 100,
         },
         1440: {
-            slidesPerView: 5,
+            slidesPerView: 6,
             spaceBetween: 100,
         },
     };
@@ -54,11 +57,14 @@ const MovieSwiper: FC<IProps> = ({content}) => {
             >
                 {
                     content && content.map((item, index) =>
-                        <SwiperSlide><MovieCard key={index} card={item}/></SwiperSlide>)
+                        <SwiperSlide key={index}>
+                            {card === 'movie' && <MovieCard card={item as IMovie}/>}
+                            {card === 'cast' && <CastCard cast={item as ICast}/>}
+                        </SwiperSlide>)
                 }
             </Swiper>
         </>
     );
 };
 
-export default MovieSwiper;
+export default AppSwiper;
