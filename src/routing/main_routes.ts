@@ -1,4 +1,5 @@
 const MAIN_ROUTES = {
+    GENRES: '/genres',
     MOVIES: '/movies',
     MOVIE_ID: '/movies/:id',
     NOW_PLAYING_MOVIE_PAGE: '/now-playing-movie',

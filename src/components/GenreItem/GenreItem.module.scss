@@ -1,0 +1,26 @@
+@import "src/utils/reset";
+@import "src/utils/mixin";
+
+.genre {
+  @include flex_center;
+  gap: 10px;
+  max-width: 300px;
+  padding: 50px 25px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 20px;
+  cursor: pointer;
+
+  & > img {
+    width: 50px;
+    height: 50px;
+  }
+
+  & > span {
+    font-size: 28px;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: 1.2px;
+    line-height: 125%;
+    text-transform: uppercase;
+  }
+}

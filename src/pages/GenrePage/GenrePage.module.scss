@@ -1,0 +1,19 @@
+@import "src/utils/reset";
+@import "src/utils/mixin";
+
+.genrePage {
+  padding: 50px;
+  width: 100vw;
+  min-height: 100vh;
+  @include flex_center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  &_content {
+    display: grid;
+    grid-auto-columns: 1fr;
+    grid-auto-rows: 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 25px 100px;
+  }
+}

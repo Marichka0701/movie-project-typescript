@@ -15,6 +15,7 @@ const Header:FC = () => {
                 <li>Movies</li>
                 <li>TV Shows</li>
                 <li>People</li>
+                <li onClick={() => navigate(MAIN_ROUTES.GENRES)}>Genres</li>
             </ul>
             {/*<select name="movies" id="movies">*/}
             {/*    <option value="" disabled={true}>Movies</option>*/}
