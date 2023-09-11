@@ -52,6 +52,15 @@ const movieService = {
             Authorization: `Bearer ${apiKEY}`,
         }
     }),
+    getMoviesByGenre: (genre: string, page: number) => apiService.get(`${endPoints.movie.moviesByGenre}`, {
+        headers: {
+            Authorization: `Bearer ${apiKEY}`,
+        },
+        params: {
+            with_genres: genre,
+            page,
+        }
+    }),
 }
 
 export {

@@ -32,7 +32,7 @@ const GenrePage: FC<IProps> = () => {
         >
             <div className={styles.genrePage_content}>
                 {
-                    genres.map((item, index) => <GenreItem name={item.name}/>)
+                    genres.map((item, index) => <GenreItem key={index} genre={item}/>)
                 }
             </div>
         </div>

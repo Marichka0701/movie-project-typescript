@@ -7,6 +7,7 @@ import {useAppSelector} from "../../hooks/useAppSelector";
 import {movieActions} from "../../store/slices/movieSlice";
 import Button from "../UI/Button/Button";
 import {MAIN_ROUTES} from "../../routing/main_routes";
+import Loader from "../Loader/Loader";
 
 interface IProps extends PropsWithChildren {
 
@@ -14,11 +15,15 @@ interface IProps extends PropsWithChildren {
 
 const TopRatedMovie: FC<IProps> = () => {
     const dispatch = useAppDispatch();
-    const {topRatedMovies} = useAppSelector(state => state.movie);
+    const {topRatedMovies, status} = useAppSelector(state => state.movie);
 
     useEffect(() => {
         dispatch(movieActions.getTopRatedMovies({page: 1}));
     }, [])
+
+    if (status === 'loading') {
+        return <Loader/>
+    }
 
     return (
         <div className={styles.topRatedMovie}>

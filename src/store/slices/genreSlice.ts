@@ -6,11 +6,13 @@ import {AxiosError} from "axios";
 
 interface IState {
     genres: IGenre[],
+    selectedGenre: IGenre,
     status: string,
 }
 
 const initialState:IState = {
     genres: [],
+    selectedGenre: null,
     status: 'loading',
 }
 
@@ -31,7 +33,9 @@ const genreSlice = createSlice({
     name: 'genreSlice',
     initialState,
     reducers: {
-
+        setSelectedGenre: (state, action) => {
+            state.selectedGenre = action.payload;
+        }
     },
     extraReducers: builder => builder
         .addCase(getAllGenres.fulfilled, (state, action) => {

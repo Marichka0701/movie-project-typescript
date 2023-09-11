@@ -7,6 +7,7 @@ import {useAppSelector} from "../../hooks/useAppSelector";
 import AppSwiper from "../AppSwiper/AppSwiper";
 import {MAIN_ROUTES} from "../../routing/main_routes";
 import Button from "../UI/Button/Button";
+import Loader from "../Loader/Loader";
 
 interface IProps extends PropsWithChildren {
 
@@ -14,11 +15,15 @@ interface IProps extends PropsWithChildren {
 
 const NowPlayingMovie: FC<IProps> = () => {
     const dispatch = useAppDispatch();
-    const {nowPlayingMovies} = useAppSelector(state => state.movie);
+    const {nowPlayingMovies, status} = useAppSelector(state => state.movie);
 
     useEffect(() => {
         dispatch(movieActions.getNowPlayingMovies({page: 1}));
     }, [])
+
+    if (status === 'loading') {
+        return <Loader/>
+    }
 
     return (
         <div className={styles.nowPlayingMovie}>

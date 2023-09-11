@@ -15,6 +15,7 @@ interface IState {
     selectedMovie: IMovie,
     mainCasts: ICast[],
     recommendations: IMovie[],
+    moviesByGenre: IMovie[],
     status: string,
 }
 
@@ -26,6 +27,7 @@ const initialState: IState = {
     selectedMovie: null,
     mainCasts: [],
     recommendations: [],
+    moviesByGenre: [],
     status: '',
 }
 
@@ -120,6 +122,19 @@ const getRecommendationsByMovieId = createAsyncThunk<IResMovie, {id:number}>(
     }
 )
 
+const getMoviesByGenre = createAsyncThunk<IResMovie, {genre: string, page:number}>(
+    'movieSlice/getMoviesByGenre',
+    async ({page, genre}, { rejectWithValue }) => {
+        try {
+            const { data } = await movieService.getMoviesByGenre(genre, page);
+            return data;
+        } catch (e) {
+            const error = e as AxiosError;
+            return rejectWithValue(error.response?.data);
+        }
+    }
+)
+
 const movieSlice = createSlice({
     name: 'movieSlice',
     initialState,
@@ -180,6 +195,14 @@ const movieSlice = createSlice({
         .addCase(getRecommendationsByMovieId.pending, (state, action) => {
             state.status = 'loading';
         })
+
+        .addCase(getMoviesByGenre.fulfilled, (state, action) => {
+            state.moviesByGenre = action.payload.results;
+            state.status = 'success';
+        })
+        .addCase(getMoviesByGenre.pending, (state, action) => {
+            state.status = 'loading';
+        })
 });
 
 const {actions, reducer: movieReducer} = movieSlice;
@@ -193,6 +216,7 @@ const movieActions = {
     getMovieById,
     getMainCastsByMovieId,
     getRecommendationsByMovieId,
+    getMoviesByGenre,
 }
 
 export {

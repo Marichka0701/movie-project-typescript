@@ -1,20 +1,20 @@
 import React, {FC, PropsWithChildren, useEffect, useState} from 'react';
 
-import styles from './DetailedInfoMovieCard.module.scss';
+import styles from './DetailedInfoMovieCardPage.module.scss';
 import {useParams} from "react-router-dom";
 import {useAppDispatch} from "../../hooks/useAppDispatch";
 import {movieActions} from "../../store/slices/movieSlice";
 import {useAppSelector} from "../../hooks/useAppSelector";
-import StarsRating from "../StarsRating/StarsRating";
-import GenreBadge from "../GenreBadge/GenreBadge";
-import Loader from "../Loader/Loader";
-import AppSwiper from "../AppSwiper/AppSwiper";
+import StarsRating from "../../components/StarsRating/StarsRating";
+import GenreBadge from "../../components/GenreBadge/GenreBadge";
+import Loader from "../../components/Loader/Loader";
+import AppSwiper from "../../components/AppSwiper/AppSwiper";
 
 interface IProps extends PropsWithChildren {
 
 }
 
-const DetailedInfoMovieCard: FC<IProps> = () => {
+const DetailedInfoMovieCardPage: FC<IProps> = () => {
     const dispatch = useAppDispatch();
     const {selectedMovie, status, mainCasts, recommendations} = useAppSelector(state => state.movie);
     const {id} = useParams();
@@ -107,4 +107,4 @@ const DetailedInfoMovieCard: FC<IProps> = () => {
     );
 }
 
-export default DetailedInfoMovieCard;
+export default DetailedInfoMovieCardPage;

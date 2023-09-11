@@ -1,0 +1,12 @@
+@import "src/utils/reset";
+
+.movieByGenrePage {
+  padding: 50px;
+  width: 80vw;
+  display: flex;
+  flex-direction: column;
+
+  &_content {
+    padding-top: 50px;
+  }
+}

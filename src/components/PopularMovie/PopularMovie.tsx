@@ -7,6 +7,7 @@ import {movieActions} from "../../store/slices/movieSlice";
 import AppSwiper from "../AppSwiper/AppSwiper";
 import Button from "../UI/Button/Button";
 import {MAIN_ROUTES} from "../../routing/main_routes";
+import Loader from "../Loader/Loader";
 
 interface IProps extends PropsWithChildren {
 
@@ -14,11 +15,15 @@ interface IProps extends PropsWithChildren {
 
 const PopularMovie: FC<IProps> = () => {
     const dispatch = useAppDispatch();
-    const {popularMovies} = useAppSelector(state => state.movie);
+    const {popularMovies, status} = useAppSelector(state => state.movie);
 
     useEffect(() => {
         dispatch(movieActions.getPopularMovies({page: 1}));
     }, [])
+
+    if (status === 'loading') {
+        return <Loader/>
+    }
 
     return (
         <div className={styles.popularMovie}>
