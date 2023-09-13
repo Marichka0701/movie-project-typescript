@@ -4,8 +4,7 @@ import {IMovie} from "../../interfaces/IMovie";
 import {movieService} from "../../services/movie.service";
 import {AxiosError} from "axios";
 import {IResMovie} from "../../interfaces/IResMovie";
-import {ICast} from "../../interfaces/ICast";
-import {IResCast} from "../../interfaces/IResCast";
+import {IResMovieByPerson} from "../../interfaces/IResMovieByPerson";
 
 interface IState {
     nowPlayingMovies: IMovie[],
@@ -13,9 +12,11 @@ interface IState {
     topRatedMovies: IMovie[],
     upcomingMovies: IMovie[],
     selectedMovie: IMovie,
-    mainCasts: ICast[],
+    movieMainPage: IMovie,
     recommendations: IMovie[],
     moviesByGenre: IMovie[],
+    searchingMovie: IMovie[],
+    moviesByPerson: IMovie[],
     status: string,
 }
 
@@ -25,9 +26,11 @@ const initialState: IState = {
     topRatedMovies: [],
     upcomingMovies: [],
     selectedMovie: null,
-    mainCasts: [],
+    movieMainPage: null,
     recommendations: [],
     moviesByGenre: [],
+    searchingMovie: [],
+    moviesByPerson: [],
     status: '',
 }
 
@@ -96,19 +99,6 @@ const getMovieById = createAsyncThunk<IMovie, {id:number}>(
     }
 )
 
-const getMainCastsByMovieId = createAsyncThunk<IResCast, {id:number}>(
-    'movieSlice/getMainCastsByMovieId',
-    async ({id}, { rejectWithValue }) => {
-        try {
-            const { data } = await movieService.getMainCastsByMovieId(id);
-            return data;
-        } catch (e) {
-            const error = e as AxiosError;
-            return rejectWithValue(error.response?.data);
-        }
-    }
-)
-
 const getRecommendationsByMovieId = createAsyncThunk<IResMovie, {id:number}>(
     'movieSlice/getRecommendationsByMovieId',
     async ({id}, { rejectWithValue }) => {
@@ -135,10 +125,40 @@ const getMoviesByGenre = createAsyncThunk<IResMovie, {genre: string, page:number
     }
 )
 
+const getSearchingMovie = createAsyncThunk<IResMovie, {query: string, page:number}>(
+    'movieSlice/getSearchingMovie',
+    async ({page, query}, { rejectWithValue }) => {
+        try {
+            const { data } = await movieService.getSearchingMovie(query, page);
+            return data;
+        } catch (e) {
+            const error = e as AxiosError;
+            return rejectWithValue(error.response?.data);
+        }
+    }
+)
+
+const getMovieByPersonId = createAsyncThunk<IResMovieByPerson, {id: number}>(
+    'movieSlice/getMovieByPersonId',
+    async ({id}, { rejectWithValue }) => {
+        try {
+            const { data } = await movieService.getMovieByPersonId(id);
+            return data;
+        } catch (e) {
+            const error = e as AxiosError;
+            return rejectWithValue(error.response?.data);
+        }
+    }
+)
+
 const movieSlice = createSlice({
     name: 'movieSlice',
     initialState,
-    reducers: {},
+    reducers: {
+        setSelectedMovie: (state, action) => {
+            state.selectedMovie = action.payload;
+        }
+    },
     extraReducers: builder => builder
         .addCase(getNowPlayingMovies.fulfilled, (state, action) => {
             state.nowPlayingMovies = action.payload.results;
@@ -150,6 +170,7 @@ const movieSlice = createSlice({
 
         .addCase(getPopularMovies.fulfilled, (state, action) => {
             state.popularMovies = action.payload.results;
+            state.movieMainPage = action.payload.results[0];
             state.status = 'success';
         })
         .addCase(getPopularMovies.pending, (state, action) => {
@@ -180,14 +201,6 @@ const movieSlice = createSlice({
             state.status = 'loading';
         })
 
-        .addCase(getMainCastsByMovieId.fulfilled, (state, action) => {
-            state.mainCasts = action.payload.cast;
-            state.status = 'success';
-        })
-        .addCase(getMainCastsByMovieId.pending, (state, action) => {
-            state.status = 'loading';
-        })
-
         .addCase(getRecommendationsByMovieId.fulfilled, (state, action) => {
             state.recommendations = action.payload.results;
             state.status = 'success';
@@ -203,6 +216,22 @@ const movieSlice = createSlice({
         .addCase(getMoviesByGenre.pending, (state, action) => {
             state.status = 'loading';
         })
+
+        .addCase(getSearchingMovie.fulfilled, (state, action) => {
+            state.searchingMovie = action.payload.results;
+            state.status = 'success';
+        })
+        .addCase(getSearchingMovie.pending, (state, action) => {
+            state.status = 'loading';
+        })
+
+        .addCase(getMovieByPersonId.fulfilled, (state, action) => {
+            state.moviesByPerson = action.payload.cast;
+            state.status = 'success';
+        })
+        .addCase(getMovieByPersonId.pending, (state, action) => {
+            state.status = 'loading';
+        })
 });
 
 const {actions, reducer: movieReducer} = movieSlice;
@@ -214,9 +243,10 @@ const movieActions = {
     getTopRatedMovies,
     getUpcomingMovies,
     getMovieById,
-    getMainCastsByMovieId,
     getRecommendationsByMovieId,
     getMoviesByGenre,
+    getSearchingMovie,
+    getMovieByPersonId,
 }
 
 export {

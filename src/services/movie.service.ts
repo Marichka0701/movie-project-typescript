@@ -42,11 +42,6 @@ const movieService = {
             Authorization: `Bearer ${apiKEY}`,
         }
     }),
-    getMainCastsByMovieId: (id: number) => apiService.get<IResCast>(`${endPoints.movie.base}/${id}/credits`, {
-        headers: {
-            Authorization: `Bearer ${apiKEY}`,
-        }
-    }),
     getRecommendationsByMovieId: (id: number) => apiService.get<IResMovie>(`${endPoints.movie.base}/${id}/recommendations`, {
         headers: {
             Authorization: `Bearer ${apiKEY}`,
@@ -60,6 +55,20 @@ const movieService = {
             with_genres: genre,
             page,
         }
+    }),
+    getSearchingMovie: (query: string, page: number) => apiService.get(`${endPoints.movie.search}`, {
+        headers: {
+            Authorization: `Bearer ${apiKEY}`,
+        },
+        params: {
+            query,
+            page,
+        }
+    }),
+    getMovieByPersonId: (id: number) => apiService.get(`${endPoints.persons.base}/${id}/movie_credits`, {
+        headers: {
+            Authorization: `Bearer ${apiKEY}`,
+        },
     }),
 }
 

@@ -25,7 +25,6 @@ const MovieCard: FC<IProps> = ({card}) => {
             className={styles.card}
         >
             <div className={styles.card_image}>
-                {/*<img src={`${process.env.REACT_APP_IMAGE_URL}${poster_path}`} alt={title}/>*/}
                 <ImagePreview path={poster_path} title={title} />
             </div>
 

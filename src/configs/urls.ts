@@ -4,11 +4,13 @@ const imageURL = process.env.REACT_APP_IMAGE_URL;
 
 const movie = '/movie';
 const genre = '/genre';
+const person = '/person';
 
 const endPoints = {
     movie: {
         base: movie,
-        moviesByGenre: `${baseURL}/discover${movie}`,
+        search: `${baseURL}/search/${movie}`,
+        moviesByGenre: `${baseURL}/discover/${movie}`,
         nowPlaying: `${baseURL}/${movie}/now_playing`,
         popular: `${baseURL}/${movie}/popular`,
         topRated: `${baseURL}/${movie}/top_rated`,
@@ -16,6 +18,9 @@ const endPoints = {
     },
     genres: {
         base: `${baseURL}${genre}/movie/list`,
+    },
+    persons: {
+        base: `${baseURL}/${person}`,
     }
 }
 

@@ -1,4 +1,5 @@
 @import "src/utils/reset";
+@import "src/utils/mixin";
 
 .header {
   width: 100vw;
@@ -11,19 +12,56 @@
   justify-content: space-between;
   align-items: center;
   //background: var(--light-theme-background);
-  background: #282c34;
 
-  color: var(--color-text-white);
+  &.light {
+    background: #282c34;
+    color: var(--color-text-white);
+  }
+
+  &.night {
+    background: lightgray;
+    color: #282c34;
+  }
 
   &_list {
+    position: relative;
     padding-left: 20px;
     display: flex;
-    gap: 100px;
+    gap: 50px;
 
     & > li {
       cursor: pointer;
-      //letter-spacing: 1px;
       font-weight: 600;
     }
+
+    &_movies {
+      &_content {
+        background: #1f2428;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 200px;
+        padding: 20px;
+        position: absolute;
+        left: 100px;
+        bottom: -140px;
+
+        cursor: pointer;
+        font-weight: 600;
+      }
+    }
   }
+
+  &_rightSide {
+    @include flex_center;
+    gap: 20px;
+  }
+}
+
+.nightMode, .lightMode {
+  width: 25px;
+  height: 25px;
+  padding-left: 5px;
+  padding-top: 5px;
 }

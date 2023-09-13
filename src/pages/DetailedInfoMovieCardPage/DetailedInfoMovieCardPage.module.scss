@@ -6,7 +6,6 @@
   @include flex_center;
   flex-direction: column;
   gap: 50px;
-  //height: 9000px;
 }
 
 .detailedMovieCard {
@@ -16,12 +15,9 @@
   background-position: center;
   position: relative;
 
-  //display: flex;
-  //align-items: flex-start;
-
   &:before {
     content: "";
-    position: absolute; /* За допомогою позиції absolute знаходимо псевдоелемент поверх обраної картинки */
+    position: absolute;
     top: 0;
     left: 0;
     right: 0;
@@ -30,12 +26,9 @@
   }
 
   &_info {
-    //@include flex_center;
     padding: 100px;
-    z-index: 1000;
     position: relative;
     display: flex;
-    align-items: center;
     gap: 100px;
 
     &_image {

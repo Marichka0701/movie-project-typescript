@@ -16,6 +16,7 @@ interface IProps extends PropsWithChildren {
 const UpcomingMovie: FC<IProps> = () => {
     const dispatch = useAppDispatch();
     const {upcomingMovies, status} = useAppSelector(state => state.movie);
+    const {theme} = useAppSelector(state => state.UI);
 
     useEffect(() => {
         dispatch(movieActions.getUpcomingMovies({page: 1}));
@@ -28,7 +29,7 @@ const UpcomingMovie: FC<IProps> = () => {
     return (
         <div className={styles.upcomingMovie}>
             <div className={styles.upcomingMovie_top}>
-                <h1 className={styles.upcomingMovie_top_title}>Upcoming</h1>
+                <h1 className={`${styles.upcomingMovie_top_title} ${theme === 'light' ? styles.light : styles.night}`}>Upcoming</h1>
                 <Button title={'Show all'} path={MAIN_ROUTES.UPCOMING_MOVIE}></Button>
             </div>
             <div>

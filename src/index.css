@@ -17,3 +17,8 @@ code {
 .swiper-wrapper {
   padding: 20px;
 }
+
+/* styles for switch */
+.react-switch-bg {
+  background: rgb(136, 136, 136) !important;
+}

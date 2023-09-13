@@ -4,7 +4,6 @@
 .user {
   cursor: pointer;
   @include flex_center;
-  //flex-direction: column;
   gap: 10px;
 
   & > img {

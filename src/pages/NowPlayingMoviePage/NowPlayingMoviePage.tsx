@@ -14,16 +14,28 @@ interface IProps extends PropsWithChildren {
 
 const NowPlayingMoviePage: FC<IProps> = () => {
     const dispatch = useAppDispatch();
-    const {nowPlayingMovies, status} = useAppSelector(state => state.movie);
+    const {nowPlayingMovies, status, searchingMovie} = useAppSelector(state => state.movie);
 
     const [currentPage, setCurrentPage] = useState<number>(1);
+    const [searchedMovie, setSearchedMovie] = useState<string>('');
+    const [trigger, setTrigger] = useState<boolean>(null);
 
     useEffect(() => {
         dispatch(movieActions.getNowPlayingMovies({page: currentPage}));
     }, [currentPage])
 
+    useEffect(() => {
+        if (trigger) {
+            dispatch(movieActions.getSearchingMovie({query: searchedMovie, page: currentPage}));
+        }
+    }, [trigger, currentPage])
+
     if (status === 'loading') {
         return <Loader/>
+    }
+
+    const handleSetTrigger = () => {
+        setTrigger(true);
     }
 
     return (
@@ -31,6 +43,23 @@ const NowPlayingMoviePage: FC<IProps> = () => {
             <div className={styles.nowPlayingMoviePage_info}>
                 <div className={styles.nowPlayingMoviePage_info_facts}>
                     <h2 className={styles.nowPlayingMoviePage_info_facts_title}>Now Playing Movies</h2>
+
+                    <form
+                        className={styles.nowPlayingMoviePage_info_facts_form}
+                        action="#"
+                    >
+                        <input
+                            onChange={(e) => setSearchedMovie(e.target.value)}
+                            placeholder={'Enter movie name'}
+                            type="text"
+                            value={searchedMovie}
+                        />
+                        <button
+                            onClick={handleSetTrigger}
+                            type={'submit'}
+                        >Search
+                        </button>
+                    </form>
 
                     <p>
                         Кіно дуже довго не мало назви. Його називали по-різному – «кіномо-, хромо-, фоно-,
@@ -54,8 +83,11 @@ const NowPlayingMoviePage: FC<IProps> = () => {
                 </div>
                 <div>
                     {
-                        nowPlayingMovies.map((item, index) =>
-                            <MovieCardPage key={index} card={item} />)
+                        searchedMovie && trigger ?
+                            searchingMovie.map((item, index) =>
+                                <MovieCardPage key={index} card={item}/>) :
+                            nowPlayingMovies.map((item, index) =>
+                                <MovieCardPage key={index} card={item}/>)
                     }
                 </div>
             </div>

@@ -21,7 +21,7 @@ const MoviesByGenrePage: FC<IProps> = () => {
     const [currentPage, setCurrentPage] = useState<number>(1);
 
     useEffect(() => {
-        dispatch(movieActions.getMoviesByGenre({genre: selectedGenre?.name, page: currentPage}));
+        dispatch(movieActions.getMoviesByGenre({genre: selectedGenre?.id.toString(), page: currentPage}));
     }, [currentPage])
 
     if (status === 'loading') {

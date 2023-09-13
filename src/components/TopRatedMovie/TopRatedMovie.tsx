@@ -16,6 +16,7 @@ interface IProps extends PropsWithChildren {
 const TopRatedMovie: FC<IProps> = () => {
     const dispatch = useAppDispatch();
     const {topRatedMovies, status} = useAppSelector(state => state.movie);
+    const {theme} = useAppSelector(state => state.UI);
 
     useEffect(() => {
         dispatch(movieActions.getTopRatedMovies({page: 1}));
@@ -28,7 +29,7 @@ const TopRatedMovie: FC<IProps> = () => {
     return (
         <div className={styles.topRatedMovie}>
             <div className={styles.topRatedMovie_top}>
-                <h1 className={styles.topRatedMovie_top_title}>Top Rated</h1>
+                <h1 className={`${styles.topRatedMovie_top_title} ${theme === 'light' ? styles.light : styles.night}`}>Top Rated</h1>
                 <Button title={'Show all'} path={MAIN_ROUTES.TOP_RATED_MOVIE_PAGE}></Button>
             </div>
             <div>

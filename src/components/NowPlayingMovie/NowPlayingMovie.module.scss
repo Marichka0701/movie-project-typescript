@@ -16,6 +16,14 @@
 
     &_title {
       @include main_title;
+
+      &.light {
+        color: black;
+      }
+
+      &.night {
+        color: lightgray;
+      }
     }
   }
 }

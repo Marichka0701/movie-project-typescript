@@ -6,10 +6,9 @@ import image_null from '../../constants/images/image_null.png';
 interface IProps extends PropsWithChildren {
     path: string,
     title: string,
-    // card: string,
 }
 
-const ImagePreview: FC<IProps> = ({ path, title}) => {
+const ImagePreview: FC<IProps> = ({path, title}) => {
     return (
         <>
             {
@@ -24,9 +23,6 @@ const ImagePreview: FC<IProps> = ({ path, title}) => {
                         alt="image_null logo"
                     />
             }
-
-            {/*}*/}
-            {/*{card === 'cast' && <img src={`${process.env.REACT_APP_IMAGE_URL}${path}`} alt={title}/>}*/}
         </>
     );
 };

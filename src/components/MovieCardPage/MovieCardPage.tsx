@@ -1,9 +1,10 @@
-import React, {FC, PropsWithChildren, useState} from 'react';
+import React, {FC, PropsWithChildren} from 'react';
 
 import styles from './MovieCardPage.module.scss'
 import {IMovie} from "../../interfaces/IMovie";
 import {useNavigate} from "react-router-dom";
 import {MAIN_ROUTES} from "../../routing/main_routes";
+import image_null from "../../constants/images/image_null.png";
 
 interface IProps extends PropsWithChildren {
     card: IMovie,
@@ -12,20 +13,28 @@ interface IProps extends PropsWithChildren {
 const MovieCardPage: FC<IProps> = ({card}) => {
     const navigate = useNavigate();
 
-    const handleNavigate = (id:number) => {
+    const handleNavigate = (id: number) => {
         navigate(`${MAIN_ROUTES.MOVIES}/${id}`);
     }
 
     return (
-        <div 
+        <div
             className={styles.card}
             onClick={() => handleNavigate(card?.id)}
         >
             <div className={styles.card_poster}>
-                <img
-                    src={`${process.env.REACT_APP_IMAGE_URL}/${card?.poster_path}`}
-                    alt={card?.title}
-                />
+                {
+                    card?.poster_path ?
+                        <img
+                            src={`${process.env.REACT_APP_IMAGE_URL}/${card?.poster_path}`}
+                            alt={card?.title}
+                        /> :
+                        <img
+                            className={styles.null}
+                            src={image_null}
+                            alt="image_null logo"
+                        />
+                }
             </div>
 
             <div className={styles.card_info}>
