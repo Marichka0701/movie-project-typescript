@@ -16,7 +16,6 @@ const GenrePage: FC<IProps> = () => {
     const dispatch = useAppDispatch();
     const {genres, status} = useAppSelector(state => state.genre);
 
-
     useEffect(() => {
         dispatch(genreActions.getAllGenres());
     }, [])

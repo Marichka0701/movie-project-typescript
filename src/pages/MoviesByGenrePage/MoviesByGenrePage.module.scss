@@ -1,10 +1,32 @@
 @import "src/utils/reset";
+@import "src/utils/mixin";
+
+.movieByGenrePageContainer {
+  width: 100%;
+  @include flex_center;
+
+  &.light {
+    background: var(--background-main-bright);
+  }
+
+  &.night {
+    background: var(--background-main-dark);
+  }
+}
 
 .movieByGenrePage {
   padding: 50px;
   width: 80vw;
   display: flex;
   flex-direction: column;
+
+  &.light {
+    background: var(--background-main-bright);
+  }
+
+  &.night {
+    background: var(--background-main-dark);
+  }
 
   &_content {
     padding-top: 50px;

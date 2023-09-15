@@ -5,6 +5,7 @@ import {IMovie} from "../../interfaces/IMovie";
 import {useNavigate} from "react-router-dom";
 import {MAIN_ROUTES} from "../../routing/main_routes";
 import image_null from "../../constants/images/image_null.png";
+import {useAppSelector} from "../../hooks/useAppSelector";
 
 interface IProps extends PropsWithChildren {
     card: IMovie,
@@ -12,6 +13,7 @@ interface IProps extends PropsWithChildren {
 
 const MovieCardPage: FC<IProps> = ({card}) => {
     const navigate = useNavigate();
+    const {theme} = useAppSelector(state => state.UI);
 
     const handleNavigate = (id: number) => {
         navigate(`${MAIN_ROUTES.MOVIES}/${id}`);
@@ -39,12 +41,12 @@ const MovieCardPage: FC<IProps> = ({card}) => {
 
             <div className={styles.card_info}>
                 <div className={styles.card_info_description}>
-                    <h2 className={styles.card_info_description_title}>{card?.title}</h2>
-                    <p className={styles.card_info_description_date}>{card?.release_date}</p>
-                    <p className={styles.card_info_description_overview}>{card?.overview}</p>
+                    <h2 className={`${styles.card_info_description_title} ${theme === 'light' ? styles.light : styles.night}`}>{card?.title}</h2>
+                    <p className={`${styles.card_info_description_date} ${theme === 'light' ? styles.light : styles.night}`}>{card?.release_date}</p>
+                    <p className={`${styles.card_info_description_overview} ${theme === 'light' ? styles.light : styles.night}`}>{card?.overview}</p>
                 </div>
 
-                <div className={styles.card_info_rating}>
+                <div className={`${styles.card_info_rating} ${theme === 'light' ? styles.light : styles.night}`}>
                     <p>{card?.vote_average}</p>
                 </div>
             </div>

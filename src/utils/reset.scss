@@ -74,11 +74,12 @@ h1, h2, h3, h4, h5, h6 {
 body {
   overflow-x: hidden;
   font-family: 'Fira Sans', sans-serif;
-  //background: lightgray;
 }
 
 :root {
   --color-text-black: black;
-  --color-text-white: white;
-  --light-theme-background: rgba(3, 37, 65, 0.9);
+  --color-text-white: whitesmoke;
+  --background-main-dark: #282c34;
+  --background-main-bright: lightgray;
+  //--light-theme-background: rgba(3, 37, 65, 0.9);
 }

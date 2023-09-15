@@ -2,18 +2,18 @@
 
 .button {
   border-radius: 5px;
-  padding: 10px;
+  padding: 10px 20px;
 
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 600;
 
   &.light {
-    background: #282c34;
-    color: lightgray;
+    background: var(--background-main-dark);
+    color: var(--color-text-white);
   }
 
   &.night {
-    background: lightgray;
-    color: #282c34;
+    background: var(--background-main-bright);
+    color: var(--background-main-dark);
   }
 }

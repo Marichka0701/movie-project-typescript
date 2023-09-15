@@ -50,7 +50,7 @@ const Header: FC = () => {
                     isVisible &&
                     <ul
                         onMouseLeave={handleMouseLeave}
-                        className={styles.header_list_movies_content}>
+                        className={`${styles.header_list_movies_content} ${theme === 'light' ? styles.light : styles.night}`}>
                         <li onClick={() => handleNavigate(MAIN_ROUTES.NOW_PLAYING_MOVIE_PAGE)}>Now playing</li>
                         <li onClick={() => handleNavigate(MAIN_ROUTES.POPULAR_MOVIE_PAGE)}>Popular</li>
                         <li onClick={() => handleNavigate(MAIN_ROUTES.UPCOMING_MOVIE)}>Upcoming</li>

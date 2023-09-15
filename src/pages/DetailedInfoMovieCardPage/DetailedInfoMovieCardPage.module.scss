@@ -6,6 +6,14 @@
   @include flex_center;
   flex-direction: column;
   gap: 50px;
+
+  &.light {
+    background: var(--background-main-bright);
+  }
+
+  &.night {
+    background: var(--background-main-dark);
+  }
 }
 
 .detailedMovieCard {
@@ -90,28 +98,53 @@
   }
 }
 
-.tabs {
-  margin-left: 20px;
-  display: flex;
-  gap: 5px;
-  border-bottom: 2px solid #bebebe;
+.detailedMovieCardSwipers {
+  &_tabs {
+    margin-left: 20px;
+    display: flex;
+    gap: 5px;
 
-  & > li {
-    cursor: pointer;
-    padding: 10px;
-    border: 1px solid transparent;
+    &.night {
+      border-bottom: 2px solid #bebebe;
+    }
 
-    &.active {
-      border-top-left-radius: 10px;
-      border-top-right-radius: 10px;
-      border-top: 2px solid #bebebe;
-      border-left: 2px solid #bebebe;
-      border-right: 2px solid #bebebe;
+    &.light {
+      border-bottom: 2px solid #282c34;
+    }
+
+    & > li {
+      cursor: pointer;
+      padding: 10px;
+      border: 1px solid transparent;
+
+      &.light {
+        color: var(--color-text-black);
+      }
+
+      &.night {
+        color: var(--color-text-white);
+      }
+
+      &.active {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+      }
+
+      &.active.night {
+        border-top: 2px solid #bebebe;
+        border-left: 2px solid #bebebe;
+        border-right: 2px solid #bebebe;
+      }
+
+      &.active.light {
+        border-top: 2px solid #282c34;
+        border-left: 2px solid #282c34;
+        border-right: 2px solid #282c34;
+      }
+    }
+
+    &_content {
+      width: 80vw;
     }
   }
-
-  &_content {
-    width: 80vw;
-  }
 }
-

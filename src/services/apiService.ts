@@ -1,8 +1,14 @@
 import axios from "axios";
 
-import {baseURL} from "../configs/urls";
+import {apiKEY, baseURL} from "../configs/urls";
 
-const apiService = axios.create({baseURL});
+const apiService = axios.create({
+    baseURL,
+    headers:{
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${apiKEY}`,
+    }
+});
 
 export {
     apiService,

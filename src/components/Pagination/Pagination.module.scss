@@ -14,10 +14,18 @@
     height: 30px;
     border-radius: 12px;
     transition: 0.8s;
-    background: #282c34;
-    color: whitesmoke;
 
     font-size: 16px;
     letter-spacing: 1px;
+
+    &.light {
+      background: var(--background-main-dark);
+      color: var(--color-text-white);
+    }
+
+    &.night {
+      background: var(--background-main-bright);
+      color: var(--color-text-black);
+    }
   }
 }

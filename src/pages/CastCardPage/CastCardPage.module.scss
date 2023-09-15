@@ -4,6 +4,14 @@
 .personContainer {
   @include flex_center;
   flex-direction: column;
+
+  &.light {
+    background: var(--background-main-bright);
+  }
+
+  &.night {
+    background: var(--background-main-dark);
+  }
 }
 
 .person {
@@ -16,6 +24,7 @@
       width: 300px;
       height: 450px;
       border-radius: 20px;
+      box-shadow: 0 2px 10px 10px rgba(255,255,255,.3);
     }
   }
 
@@ -24,9 +33,17 @@
     flex-direction: column;
     gap: 20px;
 
-    & > h2 {
+    &_title {
       font-size: 36px;
       font-weight: 700;
+
+      &.light {
+        color: var(--color-text-black);
+      }
+
+      &.night {
+        color: var(--color-text-white);
+      }
     }
 
     &_wrapper {
@@ -41,11 +58,27 @@
       &_title {
         font-size: 21px;
         font-weight: 600;
+
+        &.light {
+          color: var(--color-text-black);
+        }
+
+        &.night {
+          color: var(--color-text-white);
+        }
       }
 
       &_content {
         line-height: 125%;
         text-align: justify;
+
+        &.light {
+          color: var(--color-text-black);
+        }
+
+        &.night {
+          color: var(--color-text-white);
+        }
       }
     }
   }

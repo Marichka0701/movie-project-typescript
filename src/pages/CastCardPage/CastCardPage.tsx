@@ -20,6 +20,7 @@ const CastCardPage: FC<IProps> = () => {
     const dispatch = useAppDispatch();
     const {selectedPerson, status: castStatus} = useAppSelector(state => state.cast);
     const {moviesByPerson, status: movieStatus} = useAppSelector(state => state.movie);
+    const {theme} = useAppSelector(state => state.UI);
 
     useEffect(() => {
         dispatch(castActions.getDetailedInfoAboutPerson({id: +id}));
@@ -31,7 +32,7 @@ const CastCardPage: FC<IProps> = () => {
     }
 
     return (
-        <div className={styles.personContainer}>
+        <div className={`${styles.personContainer} ${theme === 'light' ? styles.light : styles.night}`}>
             <div className={styles.person}>
                 <div className={styles.person_photo}>
                     {
@@ -46,39 +47,39 @@ const CastCardPage: FC<IProps> = () => {
                     }
                 </div>
 
-                <div className={styles.person_info}>
-                    <h2>{selectedPerson?.name}</h2>
+                <div className={`${styles.person_info} ${theme === 'light' ? styles.light : styles.night}`}>
+                    <h2 className={`${styles.person_info_title} ${theme === 'light' ? styles.light : styles.night}`}>{selectedPerson?.name}</h2>
 
                     <div className={styles.person_info_wrapper}>
-                        <p className={styles.person_info_wrapper_title}>Biography {selectedPerson?.biography ? '' : '-'}</p>
-                        <p className={styles.person_info_wrapper_content}>{selectedPerson?.biography}</p>
+                        <p className={`${styles.person_info_wrapper_title} ${theme === 'light' ? styles.light : styles.night}`}>Biography {selectedPerson?.biography ? '' : '-'}</p>
+                        <p className={`${styles.person_info_wrapper_content} ${theme === 'light' ? styles.light : styles.night}`}>{selectedPerson?.biography}</p>
                     </div>
 
                     <div className={styles.person_info_wrapper}>
-                        <p className={styles.person_info_wrapper_title}>Known
+                        <p className={`${styles.person_info_wrapper_title} ${theme === 'light' ? styles.light : styles.night}`}>Known
                             for {selectedPerson?.known_for_department ? '' : '-'}</p>
-                        <p className={styles.person_info_wrapper_content}>{selectedPerson?.known_for_department}</p>
+                        <p className={`${styles.person_info_wrapper_content} ${theme === 'light' ? styles.light : styles.night}`}>{selectedPerson?.known_for_department}</p>
                     </div>
 
                     <div className={styles.person_info_wrapper}>
-                        <p className={styles.person_info_wrapper_title}>Place of
+                        <p className={`${styles.person_info_wrapper_title} ${theme === 'light' ? styles.light : styles.night}`}>Place of
                             birth {selectedPerson?.place_of_birth ? '' : '-'}</p>
-                        <p className={styles.person_info_wrapper_content}>{selectedPerson?.place_of_birth}</p>
+                        <p className={`${styles.person_info_wrapper_content} ${theme === 'light' ? styles.light : styles.night}`}>{selectedPerson?.place_of_birth}</p>
                     </div>
 
                     <div className={styles.person_info_wrapper}>
-                        <p className={styles.person_info_wrapper_title}>Also known
+                        <p className={`${styles.person_info_wrapper_title} ${theme === 'light' ? styles.light : styles.night}`}>Also known
                             as {selectedPerson?.also_known_as.length > 0 ? '' : '-'}</p>
                         {selectedPerson?.also_known_as?.map((item, index) =>
                             <p
                                 key={index}
-                                className={styles.person_info_wrapper_content}
+                                className={`${styles.person_info_wrapper_content} ${theme === 'light' ? styles.light : styles.night}`}
                             >{item}</p>)}
                     </div>
 
                     <div className={styles.person_info_wrapper}>
-                        <p className={styles.person_info_wrapper_title}>Popularity {selectedPerson?.popularity ? '' : '-'}</p>
-                        <p className={styles.person_info_wrapper_content}>{selectedPerson?.popularity}</p>
+                        <p className={`${styles.person_info_wrapper_title} ${theme === 'light' ? styles.light : styles.night}`}>Popularity {selectedPerson?.popularity ? '' : '-'}</p>
+                        <p className={`${styles.person_info_wrapper_content}  ${theme === 'light' ? styles.light : styles.night}`}>{selectedPerson?.popularity}</p>
                     </div>
                 </div>
             </div>
@@ -88,7 +89,7 @@ const CastCardPage: FC<IProps> = () => {
                     <div className={styles.person_info_wrapper}>
                         <p
                             style={{paddingLeft: '20px'}}
-                            className={styles.person_info_wrapper_title}
+                            className={`${styles.person_info_wrapper_title} ${theme === 'light' ? styles.light : styles.night}`}
                         >Known for </p>
                         <div className={styles.person_info_wrapper_slider}>
                             <AppSwiper content={moviesByPerson} card={'movie'}/>

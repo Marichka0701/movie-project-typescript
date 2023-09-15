@@ -8,6 +8,7 @@ import {movieActions} from "../../store/slices/movieSlice";
 import MovieCardPage from "../../components/MovieCardPage/MovieCardPage";
 import Pagination from "../../components/Pagination/Pagination";
 import Loader from "../../components/Loader/Loader";
+import ErrorPage from "../ErrorPage/ErrorPage";
 
 interface IProps extends PropsWithChildren {
 
@@ -15,6 +16,7 @@ interface IProps extends PropsWithChildren {
 
 const MoviesByGenrePage: FC<IProps> = () => {
     const {selectedGenre} = useAppSelector(state => state.genre);
+    const {theme} = useAppSelector(state => state.UI);
     const {moviesByGenre, status} = useAppSelector(state => state.movie);
     const dispatch = useAppDispatch();
 
@@ -29,18 +31,28 @@ const MoviesByGenrePage: FC<IProps> = () => {
     }
 
     return (
-        <div className={styles.movieByGenrePage}>
-            <GenreItem genre={selectedGenre}/>
+        <>
+            {
+                selectedGenre ?
+                    <div
+                        className={`${styles.movieByGenrePageContainer} ${theme === 'light' ? styles.light : styles.night}`}>
+                        <div
+                            className={`${styles.movieByGenrePage} ${theme === 'light' ? styles.light : styles.night}`}>
+                            <GenreItem genre={selectedGenre}/>
 
-            <div className={styles.movieByGenrePage_content}>
-                {
-                    moviesByGenre.map((item, index) =>
-                        <MovieCardPage key={index} card={item}/>)
-                }
-            </div>
+                            <div className={styles.movieByGenrePage_content}>
+                                {
+                                    moviesByGenre.map((item, index) =>
+                                        <MovieCardPage key={index} card={item}/>)
+                                }
+                            </div>
 
-            <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage}/>
-        </div>
+                            <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage}/>
+                        </div>
+                    </div> :
+                    <ErrorPage/>
+            }
+        </>
     );
 };
 

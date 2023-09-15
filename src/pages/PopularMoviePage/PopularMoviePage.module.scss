@@ -1,10 +1,23 @@
 @import "src/utils/reset";
 @import "src/utils/mixin";
 
+.popularMoviePageContainer {
+  width: 100%;
+  @include flex_center;
+
+  &.light {
+    background: var(--background-main-bright);
+  }
+
+  &.night {
+    background: var(--background-main-dark);
+  }
+}
+
 .popularMoviePage {
   padding: 50px;
   width: 80vw;
-  background: var(--color-text-white);
+  //background: var(--color-text-white);
   display: flex;
   flex-direction: column;
   gap: 50px;
@@ -24,18 +37,28 @@
         letter-spacing: 1px;
         font-size: 30px;
         font-weight: 700;
-        color: var(--color-text-black);
+
+        &.light {
+          color: var(--color-text-black);
+        }
+
+        &.night {
+          color: var(--color-text-white);
+        }
       }
 
       & > p {
-        padding: 20px;
-        width: 300px;
-        background: var(--light-theme-background);
-        border-radius: 5px;
+        @include fact_item;
 
-        color: whitesmoke;
-        line-height: 125%;
-        font-weight: 500;
+        &.light {
+          background: var(--background-main-dark);
+          color: var(--color-text-white);
+        }
+
+        &.night {
+          background: var(--background-main-bright);
+          color: var(--color-text-black);
+        }
       }
     }
   }

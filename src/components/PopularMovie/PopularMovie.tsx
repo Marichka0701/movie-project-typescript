@@ -27,13 +27,16 @@ const PopularMovie: FC<IProps> = () => {
     }
 
     return (
-        <div className={styles.popularMovie}>
-            <div className={styles.popularMovie_top}>
-                <h1 className={`${styles.popularMovie_top_title} ${theme === 'light' ? styles.light : styles.night}`}>What's Popular</h1>
-                <Button title={'Show all'} path={MAIN_ROUTES.POPULAR_MOVIE_PAGE}></Button>
-            </div>
-            <div>
-                <AppSwiper card={'movie'} content={popularMovies}/>
+        <div className={styles.popularMoviePage}>
+            <div className={styles.popularMovie}>
+                <div className={styles.popularMovie_top}>
+                    <h1 className={`${styles.popularMovie_top_title} ${theme === 'light' ? styles.light : styles.night}`}>What's
+                        Popular</h1>
+                    <Button title={'Show all'} path={MAIN_ROUTES.POPULAR_MOVIE_PAGE}></Button>
+                </div>
+                <div>
+                    <AppSwiper card={'movie'} content={popularMovies}/>
+                </div>
             </div>
         </div>
     );

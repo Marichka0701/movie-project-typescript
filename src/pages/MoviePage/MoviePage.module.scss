@@ -4,9 +4,9 @@
 .movieMainPage {
 
   &_poster {
-    z-index: -1;
     cursor: pointer;
     position: relative;
+
     & > img {
       width: 100vw;
       height: 90vh;

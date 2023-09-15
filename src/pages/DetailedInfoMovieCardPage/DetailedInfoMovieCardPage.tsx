@@ -19,6 +19,7 @@ interface IProps extends PropsWithChildren {
 const DetailedInfoMovieCardPage: FC<IProps> = () => {
     const dispatch = useAppDispatch();
     const {selectedMovie, status: statusMovie, recommendations} = useAppSelector(state => state.movie);
+    const {theme} = useAppSelector(state => state.UI);
     const {mainCasts, status: statusCast} = useAppSelector(state => state.cast);
     const {id} = useParams();
 
@@ -41,7 +42,7 @@ const DetailedInfoMovieCardPage: FC<IProps> = () => {
     };
 
     return (
-        <div className={styles.detailedMovieCardContainer}>
+        <div className={`${styles.detailedMovieCardContainer} ${theme === 'light' ? styles.light : styles.night}`}>
             <div
                 style={{backgroundImage: `url(${process.env.REACT_APP_IMAGE_URL}/${selectedMovie?.backdrop_path})`}}
                 className={styles.detailedMovieCard}
@@ -90,21 +91,21 @@ const DetailedInfoMovieCardPage: FC<IProps> = () => {
                 </div>
             </div>
 
-            <div>
-                <ul className={styles.tabs}>
+            <div className={styles.detailedMovieCardSwipers}>
+                <ul className={`${styles.detailedMovieCardSwipers_tabs} ${theme === 'light' ? styles.light : styles.night}`}>
                     <li
-                        className={selectedTab === 'Recommendations' ? styles.active : ''}
+                        className={`${selectedTab === 'Recommendations' ? styles.active : ''} ${theme === 'light' ? styles.light : styles.night}`}
                         onClick={() => handleSelectTab('Recommendations')}
                     >Recommendations
                     </li>
                     <li
-                        className={selectedTab === 'Main cast' ? styles.active : ''}
+                        className={`${selectedTab === 'Main cast' ? styles.active : ''} ${theme === 'light' ? styles.light : styles.night}`}
                         onClick={() => handleSelectTab('Main cast')}
                     >Main cast
                     </li>
                 </ul>
                 <div
-                    className={styles.tabs_content}
+                    className={styles.detailedMovieCardSwipers_tabs_content}
                 >
                     {
                         selectedTab === 'Main cast' &&

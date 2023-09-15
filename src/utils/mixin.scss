@@ -9,3 +9,13 @@
   font-size: 28px;
   font-weight: 600;
 }
+
+@mixin fact_item {
+  padding: 20px;
+  width: 300px;
+  border-radius: 5px;
+
+  text-align: justify;
+  line-height: 125%;
+  font-weight: 500;
+}
