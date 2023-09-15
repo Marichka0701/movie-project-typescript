@@ -18,6 +18,7 @@ interface IState {
     searchingMovie: IMovie[],
     moviesByPerson: IMovie[],
     status: string,
+    error: string,
 }
 
 const initialState: IState = {
@@ -32,6 +33,7 @@ const initialState: IState = {
     searchingMovie: [],
     moviesByPerson: [],
     status: '',
+    error: '',
 }
 
 const getNowPlayingMovies = createAsyncThunk<IResMovie, {page: number}>(
@@ -163,74 +165,110 @@ const movieSlice = createSlice({
         .addCase(getNowPlayingMovies.fulfilled, (state, action) => {
             state.nowPlayingMovies = action.payload.results;
             state.status = 'success';
+            state.error = '';
         })
         .addCase(getNowPlayingMovies.pending, (state, action) => {
             state.status = 'loading';
+        })
+        .addCase(getNowPlayingMovies.rejected, (state, action) => {
+            state.error = action.payload as string;
         })
 
         .addCase(getPopularMovies.fulfilled, (state, action) => {
             state.popularMovies = action.payload.results;
             state.movieMainPage = action.payload.results[0];
             state.status = 'success';
+            state.error = '';
         })
         .addCase(getPopularMovies.pending, (state, action) => {
             state.status = 'loading';
+        })
+        .addCase(getPopularMovies.rejected, (state, action) => {
+            state.error = action.payload as string;
         })
 
         .addCase(getTopRatedMovies.fulfilled, (state, action) => {
             state.topRatedMovies = action.payload.results;
             state.status = 'success';
+            state.error = '';
         })
         .addCase(getTopRatedMovies.pending, (state, action) => {
             state.status = 'loading';
+        })
+        .addCase(getTopRatedMovies.rejected, (state, action) => {
+            state.error = action.payload as string;
         })
 
         .addCase(getUpcomingMovies.fulfilled, (state, action) => {
             state.upcomingMovies = action.payload.results;
             state.status = 'success';
+            state.error = '';
         })
         .addCase(getUpcomingMovies.pending, (state, action) => {
             state.status = 'loading';
+        })
+        .addCase(getUpcomingMovies.rejected, (state, action) => {
+            state.error = action.payload as string;
         })
 
         .addCase(getMovieById.fulfilled, (state, action) => {
             state.selectedMovie = action.payload;
             state.status = 'success';
+            state.error = '';
         })
         .addCase(getMovieById.pending, (state, action) => {
             state.status = 'loading';
+        })
+        .addCase(getMovieById.rejected, (state, action) => {
+            state.error = action.payload as string;
         })
 
         .addCase(getRecommendationsByMovieId.fulfilled, (state, action) => {
             state.recommendations = action.payload.results;
             state.status = 'success';
+            state.error = '';
         })
         .addCase(getRecommendationsByMovieId.pending, (state, action) => {
             state.status = 'loading';
+        })
+        .addCase(getRecommendationsByMovieId.rejected, (state, action) => {
+            state.error = action.payload as string;
         })
 
         .addCase(getMoviesByGenre.fulfilled, (state, action) => {
             state.moviesByGenre = action.payload.results;
             state.status = 'success';
+            state.error = '';
         })
         .addCase(getMoviesByGenre.pending, (state, action) => {
             state.status = 'loading';
+        })
+        .addCase(getMoviesByGenre.rejected, (state, action) => {
+            state.error = action.payload as string;
         })
 
         .addCase(getSearchingMovie.fulfilled, (state, action) => {
             state.searchingMovie = action.payload.results;
             state.status = 'success';
+            state.error = '';
         })
         .addCase(getSearchingMovie.pending, (state, action) => {
             state.status = 'loading';
+        })
+        .addCase(getSearchingMovie.rejected, (state, action) => {
+            state.error = action.payload as string;
         })
 
         .addCase(getMovieByPersonId.fulfilled, (state, action) => {
             state.moviesByPerson = action.payload.cast;
             state.status = 'success';
+            state.error = '';
         })
         .addCase(getMovieByPersonId.pending, (state, action) => {
             state.status = 'loading';
+        })
+        .addCase(getMovieByPersonId.rejected, (state, action) => {
+            state.error = action.payload as string;
         })
 });
 

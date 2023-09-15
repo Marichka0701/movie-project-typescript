@@ -7,6 +7,7 @@ import {genreActions} from "../../store/slices/genreSlice";
 import Loader from "../../components/Loader/Loader";
 import background from '../../constants/images/backgroundGenrePage.jpg';
 import GenreItem from "../../components/GenreItem/GenreItem";
+import ErrorPage from "../ErrorPage/ErrorPage";
 
 interface IProps extends PropsWithChildren {
 
@@ -14,7 +15,7 @@ interface IProps extends PropsWithChildren {
 
 const GenrePage: FC<IProps> = () => {
     const dispatch = useAppDispatch();
-    const {genres, status} = useAppSelector(state => state.genre);
+    const {genres, status, error} = useAppSelector(state => state.genre);
 
     useEffect(() => {
         dispatch(genreActions.getAllGenres());
@@ -22,6 +23,10 @@ const GenrePage: FC<IProps> = () => {
 
     if (status === 'loading') {
         return <Loader/>
+    }
+
+    if (error) {
+        return <ErrorPage/>
     }
 
     return (

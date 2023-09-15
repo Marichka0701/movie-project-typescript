@@ -9,12 +9,14 @@ interface IState {
     mainCasts: ICast[],
     status: string,
     selectedPerson: ICastDetailed,
+    error: string,
 }
 
 const initialState:IState = {
     mainCasts: [],
     status: 'loading',
     selectedPerson: null,
+    error: '',
 }
 
 const getMainCastsByMovieId = createAsyncThunk<IResCast, {id:number}>(
@@ -52,17 +54,25 @@ const castSlice = createSlice({
         .addCase(getMainCastsByMovieId.fulfilled, (state, action) => {
             state.mainCasts = action.payload.cast;
             state.status = 'success';
+            state.error = '';
         })
         .addCase(getMainCastsByMovieId.pending, (state, action) => {
             state.status = 'loading';
+        })
+        .addCase(getMainCastsByMovieId.rejected, (state, action) => {
+            state.error = action.payload as string;
         })
 
         .addCase(getDetailedInfoAboutPerson.fulfilled, (state, action) => {
             state.selectedPerson = action.payload;
             state.status = 'success';
+            state.error = '';
         })
         .addCase(getDetailedInfoAboutPerson.pending, (state, action) => {
             state.status = 'loading';
+        })
+        .addCase(getDetailedInfoAboutPerson.rejected, (state, action) => {
+            state.error = action.payload as string;
         })
 })
 

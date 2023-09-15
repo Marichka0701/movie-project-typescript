@@ -61,6 +61,7 @@
 
           &.night {
             background: var(--background-main-bright);
+            color: var(--color-text-black);
 
             &::placeholder {
               color: var(--color-text-black);
@@ -69,6 +70,7 @@
 
           &.light {
             background: var(--background-main-dark);
+            color: var(--color-text-white);
 
             &::placeholder {
               color: var(--color-text-white);

@@ -1,2 +1,26 @@
 @import "src/utils/reset";
 @import "src/utils/mixin";
+
+.errorPage {
+  width: 100%;
+  height: 80vh;
+  @include flex_center;
+
+  &_error {
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+    &_title {
+      font-size: 60px;
+      font-weight: 700;
+      line-height: 70px;
+    }
+
+    &_paragraph {
+      font-weight: 300;
+      line-height: 26px;
+    }
+  }
+}

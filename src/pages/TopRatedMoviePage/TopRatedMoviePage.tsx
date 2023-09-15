@@ -7,6 +7,7 @@ import {useAppDispatch} from "../../hooks/useAppDispatch";
 import {useAppSelector} from "../../hooks/useAppSelector";
 import {movieActions} from "../../store/slices/movieSlice";
 import Loader from "../../components/Loader/Loader";
+import ErrorPage from "../ErrorPage/ErrorPage";
 
 interface IProps extends PropsWithChildren {
 
@@ -14,7 +15,7 @@ interface IProps extends PropsWithChildren {
 
 const TopRatedMoviePage: FC<IProps> = () => {
     const dispatch = useAppDispatch();
-    const {topRatedMovies, status} = useAppSelector(state => state.movie);
+    const {topRatedMovies, status, error} = useAppSelector(state => state.movie);
     const {theme} = useAppSelector(state => state.UI);
 
     const [currentPage, setCurrentPage] = useState<number>(1);
@@ -22,6 +23,10 @@ const TopRatedMoviePage: FC<IProps> = () => {
     useEffect(() => {
         dispatch(movieActions.getTopRatedMovies({page: currentPage}));
     }, [currentPage])
+
+    if (error) {
+        return <ErrorPage/>
+    }
 
     if (status === 'loading') {
         return <Loader/>

@@ -7,6 +7,7 @@ import {useAppSelector} from "../../hooks/useAppSelector";
 import MovieCardPage from "../../components/MovieCardPage/MovieCardPage";
 import Pagination from "../../components/Pagination/Pagination";
 import Loader from "../../components/Loader/Loader";
+import ErrorPage from "../ErrorPage/ErrorPage";
 
 interface IProps extends PropsWithChildren {
 
@@ -14,7 +15,7 @@ interface IProps extends PropsWithChildren {
 
 const NowPlayingMoviePage: FC<IProps> = () => {
     const dispatch = useAppDispatch();
-    const {nowPlayingMovies, status, searchingMovie} = useAppSelector(state => state.movie);
+    const {nowPlayingMovies, status, error, searchingMovie} = useAppSelector(state => state.movie);
     const {theme} = useAppSelector(state => state.UI);
 
     const [currentPage, setCurrentPage] = useState<number>(1);
@@ -30,6 +31,10 @@ const NowPlayingMoviePage: FC<IProps> = () => {
             dispatch(movieActions.getSearchingMovie({query: searchedMovie, page: currentPage}));
         }
     }, [trigger, currentPage])
+
+    if (error) {
+        return <ErrorPage/>
+    }
 
     if (status === 'loading') {
         return <Loader/>

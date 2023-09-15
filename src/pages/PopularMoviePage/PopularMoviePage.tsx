@@ -7,6 +7,7 @@ import {useAppDispatch} from "../../hooks/useAppDispatch";
 import {movieActions} from "../../store/slices/movieSlice";
 import Loader from "../../components/Loader/Loader";
 import Pagination from "../../components/Pagination/Pagination";
+import ErrorPage from "../ErrorPage/ErrorPage";
 
 interface IProps extends PropsWithChildren {
 
@@ -15,12 +16,16 @@ interface IProps extends PropsWithChildren {
 const PopularMoviePage: FC<IProps> = () => {
     const [currentPage, setCurrentPage] = useState<number>(1);
     const dispatch = useAppDispatch();
-    const {popularMovies, status} = useAppSelector(state => state.movie);
+    const {popularMovies, status, error} = useAppSelector(state => state.movie);
     const {theme} = useAppSelector(state => state.UI);
 
     useEffect(() => {
         dispatch(movieActions.getPopularMovies({page: currentPage}));
     }, [currentPage])
+
+    if (error) {
+        return <ErrorPage/>
+    }
 
     if (status === 'loading') {
         return <Loader/>

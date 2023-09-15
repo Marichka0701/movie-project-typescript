@@ -8,18 +8,23 @@ import UpcomingMovie from "../../components/UpcomingMovie/UpcomingMovie";
 import {useAppSelector} from "../../hooks/useAppSelector";
 import {useNavigate} from "react-router-dom";
 import {MAIN_ROUTES} from "../../routing/main_routes";
+import ErrorPage from "../ErrorPage/ErrorPage";
 
 interface IProps extends PropsWithChildren {
 
 }
 
 const MoviePage: FC<IProps> = () => {
-    const {movieMainPage} = useAppSelector(state => state.movie);
+    const {movieMainPage, error} = useAppSelector(state => state.movie);
     const {theme} = useAppSelector(state => state.UI);
     const navigate = useNavigate();
 
     const handleNavigateToDetailedInfo = () => {
         navigate(`${MAIN_ROUTES.MOVIES}/${movieMainPage?.id}`);
+    }
+
+    if (error) {
+        return <ErrorPage/>
     }
 
     return (

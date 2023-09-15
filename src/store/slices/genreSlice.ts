@@ -8,12 +8,14 @@ interface IState {
     genres: IGenre[],
     selectedGenre: IGenre,
     status: string,
+    error: string,
 }
 
 const initialState:IState = {
     genres: [],
     selectedGenre: null,
     status: 'loading',
+    error: '',
 }
 
 const getAllGenres = createAsyncThunk<IResGenre, void>(
@@ -41,9 +43,13 @@ const genreSlice = createSlice({
         .addCase(getAllGenres.fulfilled, (state, action) => {
             state.genres = action.payload.genres;
             state.status = 'success';
+            state.error = '';
         })
         .addCase(getAllGenres.pending, (state, action) => {
             state.status = 'loading';
+        })
+        .addCase(getAllGenres.rejected, (state, action) => {
+            state.error = action.payload as string;
         })
 });
 

@@ -11,6 +11,7 @@ import Loader from "../../components/Loader/Loader";
 import AppSwiper from "../../components/AppSwiper/AppSwiper";
 import {castActions} from "../../store/slices/castSlice";
 import image_null from "../../constants/images/image_null.png";
+import ErrorPage from "../ErrorPage/ErrorPage";
 
 interface IProps extends PropsWithChildren {
 
@@ -18,9 +19,9 @@ interface IProps extends PropsWithChildren {
 
 const DetailedInfoMovieCardPage: FC<IProps> = () => {
     const dispatch = useAppDispatch();
-    const {selectedMovie, status: statusMovie, recommendations} = useAppSelector(state => state.movie);
+    const {selectedMovie, status: statusMovie, recommendations, error: errorMovie} = useAppSelector(state => state.movie);
     const {theme} = useAppSelector(state => state.UI);
-    const {mainCasts, status: statusCast} = useAppSelector(state => state.cast);
+    const {mainCasts, status: statusCast, error: errorCast} = useAppSelector(state => state.cast);
     const {id} = useParams();
 
     const [selectedTab, setSelectedTab] = useState<string>('Recommendations');
@@ -32,6 +33,10 @@ const DetailedInfoMovieCardPage: FC<IProps> = () => {
             dispatch(movieActions.getRecommendationsByMovieId({id: +id}));
         }
     }, [id])
+
+    if (errorCast || errorCast) {
+        return <ErrorPage/>
+    }
 
     if ((statusMovie || statusCast) === 'loading') {
         return <Loader/>

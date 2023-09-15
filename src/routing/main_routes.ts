@@ -9,7 +9,7 @@ const MAIN_ROUTES = {
     TOP_RATED_MOVIE_PAGE: '/top-rated-movie',
     UPCOMING_MOVIE: '/upcoming-movie',
     DETAILED_INFO_PERSON_ID: '/persons/:id',
-
+    ERROR: '/error',
 }
 
 export {

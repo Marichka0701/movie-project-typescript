@@ -11,6 +11,7 @@ import UpcomingMoviePage from "../pages/UpcomingMoviePage/UpcomingMoviePage";
 import GenrePage from "../pages/GenrePage/GenrePage";
 import MoviesByGenrePage from "../pages/MoviesByGenrePage/MoviesByGenrePage";
 import CastCardPage from "../pages/CastCardPage/CastCardPage";
+import ErrorPage from "../pages/ErrorPage/ErrorPage";
 
 export const router = createBrowserRouter([
     {
@@ -56,7 +57,11 @@ export const router = createBrowserRouter([
             {
                 path: MAIN_ROUTES.DETAILED_INFO_PERSON_ID,
                 element: <CastCardPage/>
+            },
+            {
+                path: MAIN_ROUTES.ERROR,
+                element: <ErrorPage/>
             }
-        ]
-    }
+        ],
+    },
 ])

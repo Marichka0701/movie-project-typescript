@@ -15,9 +15,9 @@ interface IProps extends PropsWithChildren {
 }
 
 const MoviesByGenrePage: FC<IProps> = () => {
-    const {selectedGenre} = useAppSelector(state => state.genre);
+    const {selectedGenre, error: errorGenre} = useAppSelector(state => state.genre);
     const {theme} = useAppSelector(state => state.UI);
-    const {moviesByGenre, status} = useAppSelector(state => state.movie);
+    const {moviesByGenre, status, error: errorMovie} = useAppSelector(state => state.movie);
     const dispatch = useAppDispatch();
 
     const [currentPage, setCurrentPage] = useState<number>(1);
@@ -25,6 +25,10 @@ const MoviesByGenrePage: FC<IProps> = () => {
     useEffect(() => {
         dispatch(movieActions.getMoviesByGenre({genre: selectedGenre?.id.toString(), page: currentPage}));
     }, [currentPage])
+
+    if (errorMovie || errorGenre) {
+        return <ErrorPage/>
+    }
 
     if (status === 'loading') {
         return <Loader/>

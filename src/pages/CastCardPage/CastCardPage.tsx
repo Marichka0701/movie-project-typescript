@@ -9,6 +9,7 @@ import Loader from "../../components/Loader/Loader";
 import {movieActions} from "../../store/slices/movieSlice";
 import AppSwiper from "../../components/AppSwiper/AppSwiper";
 import image_null from "../../constants/images/image_null.png";
+import ErrorPage from "../ErrorPage/ErrorPage";
 
 interface IProps extends PropsWithChildren {
 
@@ -18,14 +19,20 @@ const CastCardPage: FC<IProps> = () => {
     const {id} = useParams();
 
     const dispatch = useAppDispatch();
-    const {selectedPerson, status: castStatus} = useAppSelector(state => state.cast);
-    const {moviesByPerson, status: movieStatus} = useAppSelector(state => state.movie);
+    const {selectedPerson, status: castStatus, error: errorCast} = useAppSelector(state => state.cast);
+    const {moviesByPerson, status: movieStatus, error: errorMovie} = useAppSelector(state => state.movie);
     const {theme} = useAppSelector(state => state.UI);
 
     useEffect(() => {
         dispatch(castActions.getDetailedInfoAboutPerson({id: +id}));
         dispatch(movieActions.getMovieByPersonId({id: +id}));
     }, [])
+
+    if (errorCast || errorMovie) {
+        return <ErrorPage/>
+    }
+
+    console.error('cast error: ', errorCast,'movie error:', errorMovie);
 
     if ((castStatus || movieStatus) === 'loading') {
         return <Loader/>
