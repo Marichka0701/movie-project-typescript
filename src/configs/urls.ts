@@ -21,6 +21,7 @@ const endPoints = {
     },
     persons: {
         base: `${baseURL}/${person}`,
+        popular: `${baseURL}/${person}/popular`,
     }
 }
 

@@ -34,7 +34,7 @@ const Pagination: FC<IProps> = ({currentPage, setCurrentPage}) => {
                 className={`${styles.pagination_prev} ${theme === 'light' ? styles.light : styles.night}`}
             >Previous
             </button>
-            <p className={styles.pagination_currentPage}>{currentPage}</p>
+            <p className={`${styles.pagination_currentPage} ${theme === 'light' ? styles.light : styles.night}`}>{currentPage}</p>
             <button
                 onClick={handleNextClick}
                 className={`${styles.pagination_next} ${theme === 'light' ? styles.light : styles.night}`}

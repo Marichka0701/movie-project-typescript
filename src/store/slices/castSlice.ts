@@ -4,11 +4,14 @@ import {IResCast} from "../../interfaces/IResCast";
 import {AxiosError} from "axios/index";
 import {castService} from "../../services/cast.service";
 import {ICastDetailed} from "../../interfaces/ICastDetailed";
+import {IResPopularPerson} from "../../interfaces/IResPopularPerson";
+import {IPopularPerson} from "../../interfaces/IPopularPerson";
 
 interface IState {
     mainCasts: ICast[],
     status: string,
     selectedPerson: ICastDetailed,
+    popularPersons: IPopularPerson[],
     error: string,
 }
 
@@ -16,6 +19,7 @@ const initialState:IState = {
     mainCasts: [],
     status: 'loading',
     selectedPerson: null,
+    popularPersons: [],
     error: '',
 }
 
@@ -37,6 +41,19 @@ const getDetailedInfoAboutPerson = createAsyncThunk<ICastDetailed, {id:number}>(
     async ({id}, { rejectWithValue }) => {
         try {
             const { data } = await castService.getDetailedInfoAboutPerson(id);
+            return data;
+        } catch (e) {
+            const error = e as AxiosError;
+            return rejectWithValue(error.response?.data);
+        }
+    }
+)
+
+const getPopularPersons = createAsyncThunk<IResPopularPerson, {page:number}>(
+    'castSlice/getPopularPersons',
+    async ({page}, { rejectWithValue }) => {
+        try {
+            const { data } = await castService.getPopularPersons(page);
             return data;
         } catch (e) {
             const error = e as AxiosError;
@@ -74,6 +91,18 @@ const castSlice = createSlice({
         .addCase(getDetailedInfoAboutPerson.rejected, (state, action) => {
             state.error = action.payload as string;
         })
+
+        .addCase(getPopularPersons.fulfilled, (state, action) => {
+            state.popularPersons = action.payload.results;
+            state.status = 'success';
+            state.error = '';
+        })
+        .addCase(getPopularPersons.pending, (state, action) => {
+            state.status = 'loading';
+        })
+        .addCase(getPopularPersons.rejected, (state, action) => {
+            state.error = action.payload as string;
+        })
 })
 
 const {actions, reducer: castReducer} = castSlice;
@@ -82,6 +111,7 @@ const castActions = {
     ...actions,
     getMainCastsByMovieId,
     getDetailedInfoAboutPerson,
+    getPopularPersons
 }
 
 export {

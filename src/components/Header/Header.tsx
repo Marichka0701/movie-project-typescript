@@ -58,15 +58,13 @@ const Header: FC = () => {
                     </ul>
                 }
                 <li>TV Shows</li>
-                <li>People</li>
+                <li onClick={() => handleNavigate(MAIN_ROUTES.PERSONS)}>People</li>
                 <li onClick={() => navigate(MAIN_ROUTES.GENRES)}>Genres</li>
             </ul>
             <div className={styles.header_rightSide}>
                 <Switch
                     onChange={handleChange}
                     checked={theme === 'light'}
-                    color={'blue'}
-                    onColor={'black'}
                     checkedIcon={<img className={styles.nightMode}
                                       src='https://img.icons8.com/ios/50/partly-cloudy-night--v1.png'
                                       alt="night mode icon"/>}

@@ -12,6 +12,7 @@ import GenrePage from "../pages/GenrePage/GenrePage";
 import MoviesByGenrePage from "../pages/MoviesByGenrePage/MoviesByGenrePage";
 import CastCardPage from "../pages/CastCardPage/CastCardPage";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
+import PersonsPage from "../pages/PersonsPage/PersonsPage";
 
 export const router = createBrowserRouter([
     {
@@ -61,6 +62,10 @@ export const router = createBrowserRouter([
             {
                 path: MAIN_ROUTES.ERROR,
                 element: <ErrorPage/>
+            },
+            {
+                path: MAIN_ROUTES.PERSONS,
+                element: <PersonsPage/>
             }
         ],
     },

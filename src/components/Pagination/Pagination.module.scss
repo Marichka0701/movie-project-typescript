@@ -6,7 +6,13 @@
   align-items: center;
 
   &_currentPage {
-      color: #282c34;
+      &.light {
+        color: var(--color-text-black);
+      }
+
+      &.night {
+        color: var(--color-text-white);
+      }
   }
 
   &_prev, &_next {
@@ -26,6 +32,20 @@
     &.night {
       background: var(--background-main-bright);
       color: var(--color-text-black);
+    }
+  }
+
+  &_prev {
+    &:disabled {
+      &.light {
+        background: var(--background-main-dark);
+        opacity: .7;
+      }
+
+      &.night {
+        background: var(--background-main-bright);
+        opacity: .7;
+      }
     }
   }
 }

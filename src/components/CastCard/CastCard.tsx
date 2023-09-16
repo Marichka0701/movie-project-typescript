@@ -5,9 +5,10 @@ import ImagePreview from "../ImagePreview/ImagePreview";
 import {ICast} from "../../interfaces/ICast";
 import {useNavigate} from "react-router-dom";
 import {MAIN_ROUTES} from "../../routing/main_routes";
+import {IPopularPerson} from "../../interfaces/IPopularPerson";
 
 interface IProps extends PropsWithChildren {
-    cast: ICast,
+    cast: ICast | IPopularPerson,
 }
 
 const CastCard: FC<IProps> = ({cast}) => {
@@ -28,7 +29,7 @@ const CastCard: FC<IProps> = ({cast}) => {
 
             <div className={styles.card_info}>
                 <h2 className={styles.card_info_title}>{cast?.name}</h2>
-                <p className={styles.card_info_role}>{cast?.character}</p>
+                {'character' in cast && <p className={styles.card_info_role}>{cast?.character}</p>}
             </div>
         </div>
     );

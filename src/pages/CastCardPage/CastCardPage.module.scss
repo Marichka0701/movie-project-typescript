@@ -2,6 +2,7 @@
 @import "src/utils/mixin";
 
 .personContainer {
+  width: 100%;
   @include flex_center;
   flex-direction: column;
 

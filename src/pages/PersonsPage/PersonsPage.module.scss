@@ -1,0 +1,25 @@
+@import "src/utils/reset";
+@import "src/utils/mixin";
+
+.persons {
+  width: 100%;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+
+  &.light {
+    background: var(--background-main-bright);
+  }
+
+  &.night {
+    background: var(--background-main-dark);
+  }
+
+  &_content {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 30px;
+  }
+}
