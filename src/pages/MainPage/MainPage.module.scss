@@ -1,0 +1,55 @@
+@import "src/utils/reset";
+@import "src/utils/mixin";
+
+.movieMainPage {
+
+  &_poster {
+    cursor: pointer;
+    position: relative;
+
+    & > img {
+      width: 100vw;
+      height: 90vh;
+    }
+  }
+
+  &_info {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    border-radius: 20px;
+    background: rgba(245, 245, 245, 0.6);
+    position: absolute;
+    top: 15%;
+    left: 3%;
+    max-width: 600px;
+    padding: 50px;
+
+    & > h2 {
+      font-size: 40px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+    }
+
+    & > p {
+      font-size: 20px;
+      line-height: 150%;
+      text-align: justify;
+    }
+  }
+}
+
+.swipers {
+  width: 100%;
+  padding-top: 20px;
+  @include flex_center;
+  flex-direction: column;
+
+  &.light {
+    background: lightgray;
+  }
+
+  &.night {
+    background: #282c34;
+  }
+}

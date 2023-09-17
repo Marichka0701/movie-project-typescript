@@ -15,22 +15,14 @@ interface IProps extends PropsWithChildren {
 
 const NowPlayingMoviePage: FC<IProps> = () => {
     const dispatch = useAppDispatch();
-    const {nowPlayingMovies, status, error, searchingMovie} = useAppSelector(state => state.movie);
+    const {nowPlayingMovies, status, error} = useAppSelector(state => state.movie);
     const {theme} = useAppSelector(state => state.UI);
 
     const [currentPage, setCurrentPage] = useState<number>(1);
-    const [searchedMovie, setSearchedMovie] = useState<string>('');
-    const [trigger, setTrigger] = useState<boolean>(null);
 
     useEffect(() => {
         dispatch(movieActions.getNowPlayingMovies({page: currentPage}));
     }, [currentPage])
-
-    useEffect(() => {
-        if (trigger) {
-            dispatch(movieActions.getSearchingMovie({query: searchedMovie, page: currentPage}));
-        }
-    }, [trigger, currentPage])
 
     if (error) {
         return <ErrorPage/>
@@ -40,10 +32,6 @@ const NowPlayingMoviePage: FC<IProps> = () => {
         return <Loader/>
     }
 
-    const handleSetTrigger = () => {
-        setTrigger(true);
-    }
-
     return (
         <div className={`${styles.nowPlayingMoviePageContainer} ${theme === 'light' ? styles.light : styles.night}`}>
             <div className={styles.nowPlayingMoviePage}>
@@ -51,25 +39,6 @@ const NowPlayingMoviePage: FC<IProps> = () => {
                     <div className={styles.nowPlayingMoviePage_info_facts}>
                         <h2 className={`${styles.nowPlayingMoviePage_info_facts_title} ${theme === 'light' ? styles.light : styles.night}`}>Now
                             Playing Movies</h2>
-
-                        <form
-                            className={styles.nowPlayingMoviePage_info_facts_form}
-                            action="#"
-                        >
-                            <input
-                                className={`${styles.nowPlayingMoviePage_info_facts_form_input} ${theme === 'light' ? styles.light : styles.night}`}
-                                onChange={(e) => setSearchedMovie(e.target.value)}
-                                placeholder={'Enter movie name'}
-                                type="text"
-                                value={searchedMovie}
-                            />
-                            <button
-                                className={`${styles.nowPlayingMoviePage_info_facts_form_button} ${theme === 'light' ? styles.light : styles.night}`}
-                                onClick={handleSetTrigger}
-                                type={'submit'}
-                            >Search
-                            </button>
-                        </form>
 
                         <p className={theme === 'light' ? styles.light : styles.night}>
                             Кіно дуже довго не мало назви. Його називали по-різному – «кіномо-, хромо-, фоно-,
@@ -93,11 +62,8 @@ const NowPlayingMoviePage: FC<IProps> = () => {
                     </div>
                     <div>
                         {
-                            searchedMovie && trigger ?
-                                searchingMovie.map((item, index) =>
-                                    <MovieCardPage key={index} card={item}/>) :
-                                nowPlayingMovies.map((item, index) =>
-                                    <MovieCardPage key={index} card={item}/>)
+                            nowPlayingMovies.map((item, index) =>
+                                <MovieCardPage key={index} card={item}/>)
                         }
                     </div>
                 </div>

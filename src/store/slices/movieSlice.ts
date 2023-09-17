@@ -14,7 +14,7 @@ interface IState {
     selectedMovie: IMovie,
     movieMainPage: IMovie,
     recommendations: IMovie[],
-    moviesByGenre: IMovie[],
+    filteredMovies: IMovie[],
     searchingMovie: IMovie[],
     moviesByPerson: IMovie[],
     status: string,
@@ -29,18 +29,18 @@ const initialState: IState = {
     selectedMovie: null,
     movieMainPage: null,
     recommendations: [],
-    moviesByGenre: [],
+    filteredMovies: [],
     searchingMovie: [],
     moviesByPerson: [],
     status: '',
     error: '',
 }
 
-const getNowPlayingMovies = createAsyncThunk<IResMovie, {page: number}>(
+const getNowPlayingMovies = createAsyncThunk<IResMovie, { page: number }>(
     'movieSlice/getNowPlayingMovies',
-    async ({page}, { rejectWithValue }) => {
+    async ({page}, {rejectWithValue}) => {
         try {
-            const { data } = await movieService.getNowPlayingMovies(page);
+            const {data} = await movieService.getNowPlayingMovies(page);
             return data;
         } catch (e) {
             const error = e as AxiosError;
@@ -49,11 +49,11 @@ const getNowPlayingMovies = createAsyncThunk<IResMovie, {page: number}>(
     }
 )
 
-const getPopularMovies = createAsyncThunk<IResMovie, {page:number}>(
+const getPopularMovies = createAsyncThunk<IResMovie, { page: number }>(
     'movieSlice/getPopularMovies',
-    async ({page}, { rejectWithValue }) => {
+    async ({page}, {rejectWithValue}) => {
         try {
-            const { data } = await movieService.getPopularMovies(page);
+            const {data} = await movieService.getPopularMovies(page);
             return data;
         } catch (e) {
             const error = e as AxiosError;
@@ -62,11 +62,11 @@ const getPopularMovies = createAsyncThunk<IResMovie, {page:number}>(
     }
 )
 
-const getTopRatedMovies = createAsyncThunk<IResMovie, {page: number}>(
+const getTopRatedMovies = createAsyncThunk<IResMovie, { page: number }>(
     'movieSlice/getTopRatedMovies',
-    async ({page}, { rejectWithValue }) => {
+    async ({page}, {rejectWithValue}) => {
         try {
-            const { data } = await movieService.getTopRatedMovies(page);
+            const {data} = await movieService.getTopRatedMovies(page);
             return data;
         } catch (e) {
             const error = e as AxiosError;
@@ -77,9 +77,9 @@ const getTopRatedMovies = createAsyncThunk<IResMovie, {page: number}>(
 
 const getUpcomingMovies = createAsyncThunk<IResMovie, { page: number }>(
     'movieSlice/getUpcomingMovies',
-    async ({page}, { rejectWithValue }) => {
+    async ({page}, {rejectWithValue}) => {
         try {
-            const { data } = await movieService.getUpcomingMovies(page);
+            const {data} = await movieService.getUpcomingMovies(page);
             return data;
         } catch (e) {
             const error = e as AxiosError;
@@ -88,11 +88,11 @@ const getUpcomingMovies = createAsyncThunk<IResMovie, { page: number }>(
     }
 )
 
-const getMovieById = createAsyncThunk<IMovie, {id:number}>(
+const getMovieById = createAsyncThunk<IMovie, { id: number }>(
     'movieSlice/getMovieById',
-    async ({id}, { rejectWithValue }) => {
+    async ({id}, {rejectWithValue}) => {
         try {
-            const { data } = await movieService.getMovieById(id);
+            const {data} = await movieService.getMovieById(id);
             return data;
         } catch (e) {
             const error = e as AxiosError;
@@ -101,11 +101,11 @@ const getMovieById = createAsyncThunk<IMovie, {id:number}>(
     }
 )
 
-const getRecommendationsByMovieId = createAsyncThunk<IResMovie, {id:number}>(
+const getRecommendationsByMovieId = createAsyncThunk<IResMovie, { id: number }>(
     'movieSlice/getRecommendationsByMovieId',
-    async ({id}, { rejectWithValue }) => {
+    async ({id}, {rejectWithValue}) => {
         try {
-            const { data } = await movieService.getRecommendationsByMovieId(id);
+            const {data} = await movieService.getRecommendationsByMovieId(id);
             return data;
         } catch (e) {
             const error = e as AxiosError;
@@ -114,11 +114,35 @@ const getRecommendationsByMovieId = createAsyncThunk<IResMovie, {id:number}>(
     }
 )
 
-const getMoviesByGenre = createAsyncThunk<IResMovie, {genre: string, page:number}>(
-    'movieSlice/getMoviesByGenre',
-    async ({page, genre}, { rejectWithValue }) => {
+const getFilteredMovies = createAsyncThunk<IResMovie,
+    {
+        primary_release_date_gte: string,
+        primary_release_date_lte: string,
+        vote_average_gte: number,
+        vote_average_lte: number,
+        sort_by: string,
+        genre: string,
+        page: number
+    }>(
+    'movieSlice/getFilteredMovies',
+    async ({
+               primary_release_date_gte,
+               primary_release_date_lte,
+               vote_average_gte,
+               vote_average_lte,
+               sort_by,
+               page,
+               genre
+           }, {rejectWithValue}) => {
         try {
-            const { data } = await movieService.getMoviesByGenre(genre, page);
+            const {data} = await movieService.getFilteredMovies(
+                primary_release_date_gte,
+                primary_release_date_lte,
+                vote_average_gte,
+                vote_average_lte,
+                sort_by,
+                genre,
+                page);
             return data;
         } catch (e) {
             const error = e as AxiosError;
@@ -127,11 +151,11 @@ const getMoviesByGenre = createAsyncThunk<IResMovie, {genre: string, page:number
     }
 )
 
-const getSearchingMovie = createAsyncThunk<IResMovie, {query: string, page:number}>(
+const getSearchingMovie = createAsyncThunk<IResMovie, { query: string, page: number }>(
     'movieSlice/getSearchingMovie',
-    async ({page, query}, { rejectWithValue }) => {
+    async ({page, query}, {rejectWithValue}) => {
         try {
-            const { data } = await movieService.getSearchingMovie(query, page);
+            const {data} = await movieService.getSearchingMovie(query, page);
             return data;
         } catch (e) {
             const error = e as AxiosError;
@@ -140,11 +164,11 @@ const getSearchingMovie = createAsyncThunk<IResMovie, {query: string, page:numbe
     }
 )
 
-const getMovieByPersonId = createAsyncThunk<IResMovieByPerson, {id: number}>(
+const getMovieByPersonId = createAsyncThunk<IResMovieByPerson, { id: number }>(
     'movieSlice/getMovieByPersonId',
-    async ({id}, { rejectWithValue }) => {
+    async ({id}, {rejectWithValue}) => {
         try {
-            const { data } = await movieService.getMovieByPersonId(id);
+            const {data} = await movieService.getMovieByPersonId(id);
             return data;
         } catch (e) {
             const error = e as AxiosError;
@@ -235,15 +259,15 @@ const movieSlice = createSlice({
             state.error = action.payload as string;
         })
 
-        .addCase(getMoviesByGenre.fulfilled, (state, action) => {
-            state.moviesByGenre = action.payload.results;
+        .addCase(getFilteredMovies.fulfilled, (state, action) => {
+            state.filteredMovies = action.payload.results;
             state.status = 'success';
             state.error = '';
         })
-        .addCase(getMoviesByGenre.pending, (state, action) => {
+        .addCase(getFilteredMovies.pending, (state, action) => {
             state.status = 'loading';
         })
-        .addCase(getMoviesByGenre.rejected, (state, action) => {
+        .addCase(getFilteredMovies.rejected, (state, action) => {
             state.error = action.payload as string;
         })
 
@@ -282,7 +306,7 @@ const movieActions = {
     getUpcomingMovies,
     getMovieById,
     getRecommendationsByMovieId,
-    getMoviesByGenre,
+    getFilteredMovies,
     getSearchingMovie,
     getMovieByPersonId,
 }

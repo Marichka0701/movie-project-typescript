@@ -1,8 +1,4 @@
 @import "src/utils/reset";
-
-@import "src/utils/reset";
-
-@import "src/utils/reset";
 @import "src/utils/mixin";
 
 .upcomingMovie {
@@ -13,10 +9,17 @@
   &_top {
     margin-left: 20px;
     padding: 10px 0;
-    border-bottom: 1px solid lightgray;
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    &.light {
+      border-bottom: 1px solid var(--background-main-dark);
+    }
+
+    &.night {
+      border-bottom: 1px solid var(--background-main-bright);
+    }
 
     &_title {
       @include main_title;

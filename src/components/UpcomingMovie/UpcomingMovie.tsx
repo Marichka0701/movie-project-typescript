@@ -28,7 +28,7 @@ const UpcomingMovie: FC<IProps> = () => {
 
     return (
         <div className={styles.upcomingMovie}>
-            <div className={styles.upcomingMovie_top}>
+            <div className={`${styles.upcomingMovie_top} ${theme === 'light' ? styles.light : styles.night}`}>
                 <h1 className={`${styles.upcomingMovie_top_title} ${theme === 'light' ? styles.light : styles.night}`}>Upcoming</h1>
                 <Button title={'Show all'} path={MAIN_ROUTES.UPCOMING_MOVIE}></Button>
             </div>

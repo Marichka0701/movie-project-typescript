@@ -40,7 +40,7 @@ const Header: FC = () => {
     return (
         <header className={`${styles.header} ${theme === 'light' ? styles.light : styles.night}`}>
             <ul className={styles.header_list}>
-                <li onClick={() => handleNavigate(MAIN_ROUTES.MOVIES)}>Main</li>
+                <li onClick={() => handleNavigate(MAIN_ROUTES.MAIN)}>Main</li>
                 <li
                     onClick={handleSetIsVisible}
                     className={styles.header_list_movies}
@@ -51,6 +51,7 @@ const Header: FC = () => {
                     <ul
                         onMouseLeave={handleMouseLeave}
                         className={`${styles.header_list_movies_content} ${theme === 'light' ? styles.light : styles.night}`}>
+                        <li onClick={() => handleNavigate(MAIN_ROUTES.MOVIES)}>All movies</li>
                         <li onClick={() => handleNavigate(MAIN_ROUTES.NOW_PLAYING_MOVIE_PAGE)}>Now playing</li>
                         <li onClick={() => handleNavigate(MAIN_ROUTES.POPULAR_MOVIE_PAGE)}>Popular</li>
                         <li onClick={() => handleNavigate(MAIN_ROUTES.UPCOMING_MOVIE)}>Upcoming</li>

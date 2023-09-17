@@ -28,7 +28,7 @@ const TopRatedMovie: FC<IProps> = () => {
 
     return (
         <div className={styles.topRatedMovie}>
-            <div className={styles.topRatedMovie_top}>
+            <div className={`${styles.topRatedMovie_top} ${theme === 'light' ? styles.light : styles.night}`}>
                 <h1 className={`${styles.topRatedMovie_top_title} ${theme === 'light' ? styles.light : styles.night}`}>Top Rated</h1>
                 <Button title={'Show all'} path={MAIN_ROUTES.TOP_RATED_MOVIE_PAGE}></Button>
             </div>

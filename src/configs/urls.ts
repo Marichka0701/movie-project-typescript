@@ -8,6 +8,7 @@ const person = '/person';
 
 const endPoints = {
     movie: {
+        all: `${baseURL}/discover/${movie}`,
         base: movie,
         search: `${baseURL}/search/${movie}`,
         moviesByGenre: `${baseURL}/discover/${movie}`,

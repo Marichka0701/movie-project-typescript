@@ -28,7 +28,7 @@ const NowPlayingMovie: FC<IProps> = () => {
 
     return (
         <div className={styles.nowPlayingMovie}>
-            <div className={styles.nowPlayingMovie_top}>
+            <div className={`${styles.nowPlayingMovie_top} ${theme === 'light' ? styles.light : styles.night}`}>
                 <h1 className={`${styles.nowPlayingMovie_top_title} ${theme === 'light' ? styles.light : styles.night}`}>Trending</h1>
                 <Button
                     title={'Show all'}

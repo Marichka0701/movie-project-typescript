@@ -29,7 +29,7 @@ const PopularMovie: FC<IProps> = () => {
     return (
         <div className={styles.popularMoviePage}>
             <div className={styles.popularMovie}>
-                <div className={styles.popularMovie_top}>
+                <div className={`${styles.popularMovie_top} ${theme === 'light' ? styles.light : styles.night}`}>
                     <h1 className={`${styles.popularMovie_top_title} ${theme === 'light' ? styles.light : styles.night}`}>What's
                         Popular</h1>
                     <Button title={'Show all'} path={MAIN_ROUTES.POPULAR_MOVIE_PAGE}></Button>

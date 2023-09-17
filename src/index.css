@@ -22,3 +22,17 @@ code {
 .react-switch-bg {
   background: rgb(136, 136, 136) !important;
 }
+
+/* styles for sorting*/
+#menu- > div.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation8.MuiMenu-paper.MuiPopover-paper.MuiMenu-paper.css-3dzjca-MuiPaper-root-MuiPopover-paper-MuiMenu-paper {
+  max-height: 200px !important;
+}
+
+.css-187mznn-MuiSlider-root {
+  color: gray !important;
+}
+.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input {
+  color: gray !important;
+  border: 1px solid gray !important;
+}
+

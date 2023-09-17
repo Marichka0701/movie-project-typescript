@@ -4,6 +4,7 @@ import {movieReducer} from "./slices/movieSlice";
 import {genreReducer} from "./slices/genreSlice";
 import {castReducer} from "./slices/castSlice";
 import {UIReducer} from "./slices/UISlice";
+import {sortReducer} from "./slices/sortSlice";
 
 export const store = configureStore({
     reducer: {
@@ -11,6 +12,7 @@ export const store = configureStore({
         genre: genreReducer,
         cast: castReducer,
         UI: UIReducer,
+        sort: sortReducer,
     }
 })
 

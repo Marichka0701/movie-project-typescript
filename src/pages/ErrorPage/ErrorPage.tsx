@@ -15,7 +15,7 @@ const ErrorPage: FC<IProps> = () => {
                 <h2 className={styles.errorPage_error_title}>Oops... Page not found</h2>
                 <p className={styles.errorPage_error_paragraph}>Sorry, the page you`re looking for doesn`t exist. You can return
                     to the main page.</p>
-                <Button title={'Main Page'} path={MAIN_ROUTES.MOVIES}></Button>
+                <Button title={'Main Page'} path={MAIN_ROUTES.MAIN}></Button>
             </div>
         </div>
     );

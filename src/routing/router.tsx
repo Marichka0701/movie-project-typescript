@@ -1,7 +1,7 @@
 import {createBrowserRouter, Navigate} from "react-router-dom";
 
 import MainLayout from "../layouts/MainLayout/MainLayout";
-import MoviePage from "../pages/MoviePage/MoviePage";
+import MainPage from "../pages/MainPage/MainPage";
 import {MAIN_ROUTES} from "./main_routes";
 import DetailedInfoMovieCardPage from "../pages/DetailedInfoMovieCardPage/DetailedInfoMovieCardPage";
 import NowPlayingMoviePage from "../pages/NowPlayingMoviePage/NowPlayingMoviePage";
@@ -13,19 +13,20 @@ import MoviesByGenrePage from "../pages/MoviesByGenrePage/MoviesByGenrePage";
 import CastCardPage from "../pages/CastCardPage/CastCardPage";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import PersonsPage from "../pages/PersonsPage/PersonsPage";
+import MoviePage from "../pages/MoviePage/MoviePage";
 
 export const router = createBrowserRouter([
     {
         index: true,
-        element: <Navigate to={MAIN_ROUTES.MOVIES}/>,
+        element: <Navigate to={MAIN_ROUTES.MAIN}/>,
     },
     {
         path: '',
         element: <MainLayout/>,
         children: [
             {
-                path: MAIN_ROUTES.MOVIES,
-                element: <MoviePage/>,
+                path: MAIN_ROUTES.MAIN,
+                element: <MainPage/>,
             },
             {
                 path: MAIN_ROUTES.DETAILED_INFO_MOVIE_ID,
@@ -58,6 +59,10 @@ export const router = createBrowserRouter([
             {
                 path: MAIN_ROUTES.DETAILED_INFO_PERSON_ID,
                 element: <CastCardPage/>
+            },
+            {
+                path: MAIN_ROUTES.MOVIES,
+                element: <MoviePage/>
             },
             {
                 path: MAIN_ROUTES.ERROR,

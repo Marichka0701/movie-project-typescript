@@ -17,13 +17,21 @@ interface IProps extends PropsWithChildren {
 const MoviesByGenrePage: FC<IProps> = () => {
     const {selectedGenre, error: errorGenre} = useAppSelector(state => state.genre);
     const {theme} = useAppSelector(state => state.UI);
-    const {moviesByGenre, status, error: errorMovie} = useAppSelector(state => state.movie);
+    const {filteredMovies, status, error: errorMovie} = useAppSelector(state => state.movie);
     const dispatch = useAppDispatch();
 
     const [currentPage, setCurrentPage] = useState<number>(1);
 
     useEffect(() => {
-        dispatch(movieActions.getMoviesByGenre({genre: selectedGenre?.id.toString(), page: currentPage}));
+        dispatch(movieActions.getFilteredMovies({
+            primary_release_date_gte: null,
+            primary_release_date_lte: null,
+            vote_average_gte: null,
+            vote_average_lte: null,
+            sort_by: null,
+            genre: selectedGenre?.id.toString(),
+            page: currentPage
+        }));
     }, [currentPage])
 
     if (errorMovie || errorGenre) {
@@ -46,7 +54,7 @@ const MoviesByGenrePage: FC<IProps> = () => {
 
                             <div className={styles.movieByGenrePage_content}>
                                 {
-                                    moviesByGenre.map((item, index) =>
+                                    filteredMovies.map((item, index) =>
                                         <MovieCardPage key={index} card={item}/>)
                                 }
                             </div>
